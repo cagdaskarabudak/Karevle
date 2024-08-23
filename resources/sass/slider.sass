@@ -1,0 +1,95 @@
+.slider-card
+    width: 100%
+    height: 500px
+    border-radius: 5px
+    overflow: hidden
+    box-shadow: 0 0 1px $dark
+    position: relative
+    .swiper-pagination
+        position: absolute
+        .swiper-pagination-bullet-active
+            background: $primary
+    .swiper
+        height: 100%
+        width: 100%
+        .swiper-wrapper
+            .swiper-slide
+                position: relative
+                text-decoration: none
+                background-color: rgba(255, 255, 255)
+                background-position: center
+                background-size: cover
+                background-repeat: no-repeat
+                display: flex
+                flex-direction: column
+                padding: 5%
+                transition: 0.5s
+                img
+                    position: absolute
+                    z-index: -1
+                    width: 100%
+                    height: 100%
+                    object-fit: cover
+                    transition: 0.5s
+                .content-opaciter
+                    position: absolute
+                    z-index: -1
+                    height: 100%
+                    width: 100%
+                    transition: 0.5s
+                    background: rgba(#000, 0.3)
+                    opacity: 0
+                p
+                    opacity: 0
+                    transition: 0.5s
+                &:hover
+                    img
+                        filter: blur(5px)
+                    .content-opaciter
+                        opacity: 1
+                    p
+                        opacity: 1
+                h1
+                    font-weight: 900
+                &.top-left
+                    justify-content: start
+                    align-items: start
+                &.top-center
+                    justify-content: start
+                    align-items: center
+                &.top-right
+                    justify-content: start
+                    align-items: end
+                &.bottom-left
+                    justify-content: end
+                    align-items: start
+                &.bottom-center
+                    justify-content: end
+                    align-items: center
+                &.bottom-right
+                    justify-content: end
+                    align-items: end
+                &.center-left
+                    justify-content: center
+                    align-items: start
+                &.center-center
+                    justify-content: center
+                    align-items: center
+                &.center-right
+                    justify-content: center
+                    align-items: end
+                &.dark-theme
+                    h1
+                        color: $light
+                        text-shadow: -0.5px 0.5px 0 $dark, 0.5px 0.5px 0 $dark, 0.5px -0.5px 0 $dark, -0.5px -0.5px 0 $dark
+                    p
+                        color: $light
+                        text-shadow: -0.5px 0.5px 0 $dark, 0.5px 0.5px 0 $dark, 0.5px -0.5px 0 $dark, -0.5px -0.5px 0 $dark
+                &.light-theme
+                    h1
+                        color: $dark
+                        text-shadow: -0.5px 0.5px 0 $light, 0.5px 0.5px 0 $light, 0.5px -0.5px 0 $light, -0.5px -0.5px 0 $light
+                    p
+                        color: $dark
+                        text-shadow: -0.5px 0.5px 0 $light, 0.5px 0.5px 0 $light, 0.5px -0.5px 0 $light, -0.5px -0.5px 0 $light
+                
