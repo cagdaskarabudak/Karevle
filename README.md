@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="./public/storage/main_images/favicon.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="https://karevle.com" target="_blank"><img src="https://karevle.com/src/assets/favicon.png" width="400" alt="Karevle Logo"></a></p>
 
 ## About Karevle
 
