@@ -10,72 +10,45 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ApiController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', [MainController::class, 'home'])->name('home');
 
-Route::get('/hakkimizda', function () {
-    return view('about-me');
-})->name('about-me');
-
-Route::get('/iletisim', function () {
-    return view('contact');
-})->name('contact');
-
 Route::get('/urun/{slug}', [ProductController::class, 'viewProduct'])->name('product.show');
 
-Route::get('/liste/{slug}', [ListController::class, 'viewList'])->name('list.show');
+Route::get('/liste/{slug}', [ListController::class, 'viewList'])->name('list.view');
 
-Route::middleware(['guest'])->group(function () {
+Route::get('/kategoriler/{slug}', [CategoryController::class, 'view'])->name('category.view');
+
+Route::get('/tum-urunler', [ProductController::class, 'viewAll'])->name('allProducts.view');
+
+Route::post('/mainSearch', [SearchController::class, 'mainSearch'])->name('mainSearch');
+Route::get('/arama', [SearchController::class, 'search'])->name('search');
+
+Route::middleware(['guest'])->group(function (){
+    Route::get('giris-yap', [AuthController::class, 'loginView'])->name('login.view');
+    Route::get('kayit-ol', [AuthController::class, 'registerView'])->name('register.view');
     Route::post('/register', [AuthController::class, 'register'])->name('register.post');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 });
 
-Route::post('/getProductInfo', [ProductController::class, 'getProductInfo'])->name('getProductInfo');
-
-Route::post('/getBaskets', [ShoppingCartController::class, 'getBaskets'])->name('getBaskets');
-
-Route::post('/basket-product', [ProductController::class, 'basketProduct'])->name('product.basket');
-
-Route::post('/clear-basket', [ShoppingCartController::class, 'clearBasket'])->name('basket.clear');
-
-Route::post('/unbasket-product', [ProductController::class, 'unBasketProduct'])->name('product.unBasket');
-
-Route::get('/kategoriler/{slug}', [CategoryController::class, 'view'])->name('category.view');
-
-Route::get('/sepetim', [ShoppingCartController::class, 'view'])->name('shopping-card.view');
-
-Route::post('/check/slug', [DashboardController::class, 'checkSlug'])->name('check.slug');
-
 Route::middleware([AuthMiddleware::class])->group(function () {
-    Route::get('/profil', function(){
-        return view('auth.profile');
-    })->name('user.profile');
+    Route::get('/profilim', [UserController::class, 'myProfileView'])->name('user.profile');
+    Route::post('/profilim/update', [UserController::class, 'update'])->name('user.profile.post');
 
-    Route::get('/favoriler', [FavoriteController::class, 'viewFavorites'])->name('favorites');
+    Route::get('/profilim/siparislerim', [UserController::class, 'myOrdersView'])->name('user.orders');
+    Route::get('/profilim/adreslerim', [UserController::class, 'myAdressesView'])->name('user.addresses');
+    Route::get('/profilim/kuponlarım', [UserController::class, 'myCouponsView'])->name('user.coupons');
 
-    Route::post('/update', [AuthController::class, 'update'])->name('update.post');
+    Route::get('/favorilerim', [FavoriteController::class, 'viewFavorites'])->name('favorites');
+    Route::post('/addFavorites', [FavoriteController::class, 'addFavorites'])->name('addFavorites');
+    Route::post('/removeFavorites', [FavoriteController::class, 'removeFavorites'])->name('removeFavorites');
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    Route::post('/favoritedProduct', [FavoriteController::class, 'favoritedProduct'])->name('favoritedProduct');
-
-    Route::post('/unFavoritedProduct', [FavoriteController::class, 'unFavoritedProduct'])->name('unFavoritedProduct');
-
-    Route::post('/getFavoritedProducts', [FavoriteController::class, 'getFavoritedProducts'])->name('getFavoritedProducts');
-
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.home');
-
-    Route::get('/dashboard/products', [DashboardController::class, 'listproducts'])->name('dashboard.products');
-
-    Route::get('/dashboard/products/create', [DashboardController::class, 'create_product_view'])->name('dashboard.products.create.view');
-
-    Route::post('/dashboard/products/create', [DashboardController::class, 'create_product_create'])->name('dashboard.products.create.create');
-
-    Route::post('/dashboard/products/destroy', [DashboardController::class, 'destroyProduct'])->name('dashboard.products.destroy');
-
-    Route::get('/dashboard/products/update/{id}', [DashboardController::class, 'update_product_view'])->name('dashboard.products.update.view');
-
-    Route::get('/dashboard/categories', [DashboardController::class, 'listcategories'])->name('dashboard.categories');
 
 });
 

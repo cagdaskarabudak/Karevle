@@ -1,131 +1,235 @@
-.swiper.product-images
-    border-radius: 5px
-    .swiper-wrapper
-        .swiper-slide
-            width: 100%
-            height: 50%
-            img
-                width: 100%
-                height: 100%
-                object-fit: contain
-.product-card
-    height: 80%
-    position: relative
+.count-info
+    font-size: 10pt
+
+.products-card
     .card-body
-        .product-lists
-            margin-bottom: 1%
-        .product-name
-            font-size: 20pt
-            font-weight: 100
-        .product-rate
+        display: flex
+        flex-wrap: wrap
+        row-gap: 20px
+        column-gap: 10px
+        justify-content: center
+        align-items: center
+        z-index: 0
+        .product-card
+            position: relative
             display: flex
-            font-size: 20px
-            align-items: center
-            .product-rate-count
-                font-size: 10pt
-                color: $secondary
-                font-weight: 100
-        .product-old-price
-            color: $secondary
-            margin-top: 1%
-            text-decoration: line-through
-            font-size: 12pt
-        .product-price
-            font-weight: 700
-            color: $primary
-            font-size: 18pt
-        .product-content
-            padding: 10px
-    .zoomed-image
-        position: absolute
-        width: 400px
-        height: 400px
-        border: 1px solid black
-        top: 0
-        left: 0
-
-
-.buttons
-    display: flex
-    justify-content: center
-    align-items: center
-    height: 20%
-    .add-to-card.product-page
-        width: 60%
-        height: 60%
-        border-radius: 5px
-        background: $primary
-        color: $light
-        font-weight: 700
-        border: none
-        transition: 0.3s
-        &:hover
-            background: shade-color($primary, 5)
-        &:active
-            background: shade-color($primary, 10)
-    .favorite-btn.product-page
-        width: 10%
-        height: 60%
-        border-radius: 5px
-        border: 1px solid $danger
-        background-color: transparent
-        color: $danger
-        font-size: 28pt
-        transition: 0.3s
-        margin-left: 1%
-        &:hover
-            background: shade-color($danger, 5)
-            color: $light
-        &:active
-            background: shade-color($danger, 10)
-        &.favorite
-            background: $danger
-            color: $light
-
-
-.comments
-    display: flex
-    flex-direction: row
-    flex-wrap: wrap
-    padding: 0
-    justify-content: center
-    .comment-card
-        display: block
-        width: auto
-        max-width: 25%
-        height: auto
-        margin: 5px
-        background: #fff
-        border-radius: 5px
-        padding: 1%
-        box-shadow: 0 0 1px $secondary
-        .comment
-            .comment-info
-                margin-bottom: 1%
-                .comment-user
-                    font-weight: 700
-                    font-size: 10pt
-                .comment-date
-                    font-size: 10pt
-                    font-weight: 100
-            .comment-rate
-                margin-bottom: 1%
+            flex-direction: column
+            @include responsive('xs')
+                flex-basis: calc(100% / 1)
+            @include responsive('sm')
+                flex-basis: calc(100% / 2.5)
+            @include responsive('md')
+                flex-basis: calc(100% / 3.5)
+            @include responsive('lg')
+                flex-basis: calc(100% / 3.5)
+            @include responsive('xl')
+                flex-basis: calc(100% / 4.5)
+            @include responsive('xxl')
+                flex-basis: calc(100% / 5.5)
+            height: fit-content
+            border-radius: 5px
+            overflow: hidden
+            box-shadow: 0 0 1px $dark
+            button.product-favorite-btn
+                position: absolute
                 display: flex
+                justify-content: center
                 align-items: center
-                justify-content: end
-                span
-                    font-size: 15px
-            .comment-content
-                margin-bottom: 1%
-            .comment-images
-                position: relative
-                display: flex
-                width: 100%
-                height: 100px
-                overflow: hidden
-                img
-                    width: auto
-                    height: 100%
+                top: 1%
+                right: 1%
+                z-index: 2
+                border-radius: 50%
+                @include responsive('xs')
+                    width: 40px
+                    height: 40px
+                    font-size: 16pt
+                @include responsive('sm')
+                    width: 40px
+                    height: 40px
+                    font-size: 16pt
+                @include responsive('md')
+                    width: 35px
+                    height: 35px
+                    font-size: 14pt
+                @include responsive('lg')
+                    width: 30px
+                    height: 30px
+                    font-size: 12pt
+                @include responsive('xl')
+                    width: 30px
+                    height: 30px
+                    font-size: 12pt
+                @include responsive('xxl')
+                    width: 30px
+                    height: 30px
+                    font-size: 12pt
+                border: none
+                background: rgb($danger, 1)
+                color: $light
+                transition: 0.3s
+                &.favorited
+                    background: transparent
+                    color: $danger
+                    border: none
+                    @include responsive('xs')
+                        font-size: 20pt
+                    @include responsive('sm')
+                        font-size: 20pt
+                    @include responsive('md')
+                        font-size: 18pt
+                    @include responsive('lg')
+                        font-size: 16pt
+                    @include responsive('xl')
+                        font-size: 16pt
+                    @include responsive('xxl')
+                        font-size: 16pt
+                    &:active
+                        background: rgb($danger, 1)
+                        color: $light
+                        border: none
+                        font-size: 10pt
+                    svg
+                        stroke: $white
+                        stroke-width: 8
+                &:active
+                    background: transparent
+                    color: $danger
+                    border: none
+                    font-size: 16pt
+            .product-tags
+                position: absolute
+                top: 1%
+                left: 1%
+                z-index: 2
+                .tag
                     border-radius: 5px
-
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    column-gap: 5px
+                    width: max-content
+                    padding: 3px
+                    font-size: 8pt
+                    margin-bottom: 3px
+                    &.tag-success
+                        color: $light
+                        background: rgb($success, 1)
+                    &.tag-danger
+                        color: $light
+                        background: rgb($danger, 1)
+                    &.tag-warning
+                        color: $light
+                        background: rgb($warning, 1)
+                    &.tag-dark
+                        color: $light
+                        background: rgb($dark, 1)
+                    &.tag-primary
+                        color: $light
+                        background: rgb($primary, 1)
+                    &.tag-secondary
+                        color: $light
+                        background: rgb($secondary, 1)
+            .product-images
+                @include responsive('xs')
+                    height: fit-content
+                @include responsive('sm')
+                    height: fit-content
+                @include responsive('md')
+                    height: fit-content
+                @include responsive('lg')
+                    height: fit-content
+                @include responsive('xl')
+                    height: fit-content
+                @include responsive('xxl')
+                    height: fit-content
+                width: 100%
+                .swiper
+                    height: 100%
+                    .swiper-wrapper
+                        .swiper-slide
+                            img
+                                width: 100%
+                                height: 100%
+                                object-fit: contain
+                    @include responsive('xs')
+                        .swiper-pagination
+                            display: none
+                    @include responsive('sm')
+                        .swiper-pagination
+                            display: none
+                    @include responsive('md')
+                        .swiper-pagination
+                            display: none
+                    @include responsive('lg')
+                        .swiper-scrollbar
+                            display: none
+                    @include responsive('xl')
+                        .swiper-scrollbar
+                            display: none
+                    @include responsive('xxl')
+                        .swiper-scrollbar
+                            display: none
+            .product-info
+                display: block
+                height: 125px
+                display: flex
+                flex-direction: column
+                justify-content: space-between
+                align-items: center
+                padding-top: 10px
+                padding-bottom: 10px
+                .name
+                    font-size: 10pt
+                    text-align: center
+                .rate
+                    text-align: center
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    .rating
+                        font-size: 14px
+                    .rating-stars
+                        font-size: 14px
+                    .total-comments
+                        font-size: 10px
+                        font-weight: 100
+                .price
+                    text-align: center
+                    font-size: 10pt
+                    font-weight: 700
+                    color: $success
+            .product-footer
+                display: flex
+                border-top: 1px solid $gray-200
+                height: 50px
+                button
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    column-gap: 10px
+                    font-size: 10pt
+                    width: 50%
+                    border: none
+                    background: $white
+                    transition: 0.3s
+                    height: 100%
+                    span
+                        display: none
+                    &:first-child
+                        border-right: 1px solid $gray-200
+                    &:hover
+                        background: $light
+                        width: 100%
+                        span
+                            display: block
+                    &.shopping-card-btn
+                        color: $primary
+                        &:active
+                            color: $white
+                            background: $primary
+                    &.detail-btn
+                        color: $dark
+                        &:active
+                            color: $white
+                            background: $dark
 

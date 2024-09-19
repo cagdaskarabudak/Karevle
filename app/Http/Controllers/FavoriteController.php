@@ -6,77 +6,57 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\FavoritedProduct;
-use App\Models\Category;
 use App\Models\Product;
 
 class FavoriteController extends Controller
 {
-
     public function viewFavorites(){
-        $favorites = FavoritedProduct::where('user_id', '=', Auth::user()->id)->with('product')->get();
-        $categories = Category::all();
-
-        return view('favorites')->with([
-            'favorites' => $favorites,
-            'categories' => $categories
-        ]);
+        return view('user.favorites');
     }
 
-    public function favoritedProduct(Request $request){
+    public function addFavorites(Request $request){
         try{
             DB::beginTransaction();
-            $product = Product::where('id', '=', $request->product_id)->first();
-            $isFavoritedProduct = FavoritedProduct::where('user_id', '=', Auth::user()->id)->where('product_id', '=', $product->id)->first();
-
-            if($product && !$isFavoritedProduct){
+            $product = Product::where('id', '=', $request->productid)->first();
+            if(!$product->isFavoritedUser(Auth::user()->id)){
                 $favoritedProduct = new FavoritedProduct;
-                $favoritedProduct->user_id = Auth::user()->id;
                 $favoritedProduct->product_id = $product->id;
+                $favoritedProduct->user_id = Auth::user()->id;
                 $favoritedProduct->save();
-
-                DB::commit();
+            }
+            else{
+                return response()->json(false);
             }
 
-            return response()->json('Success');
-
-        } catch(\Exception $e){
+            DB::commit();
+            return response()->json(true);
+        }
+        catch(\Exception $e){
             DB::rollBack();
-            return response()->json([
-                'errors' => $e->getMessage(),
-                'message' => 'Error!'
-            ]);
+
+            return response()->json($e->getMessage());
         }
     }
 
-    public function unFavoritedProduct(Request $request){
+    public function removeFavorites(Request $request){
         try{
             DB::beginTransaction();
-            $favoritedProduct = FavoritedProduct::where('product_id', '=', $request->product_id)->where('user_id', '=', Auth::user()->id)->first();
-            if($favoritedProduct){
+            $product = Product::where('id', '=', $request->productid)->first();
+            if($product->isFavoritedUser(Auth::user()->id)){
+                $favoritedProduct = FavoritedProduct::where('product_id', '=', $product->id)->where('user_id', '=', Auth::user()->id)->first();
                 $favoritedProduct->delete();
-                DB::commit();
+            }
+            else{
+                return response()->json(false);
             }
 
-            return response()->json('Success');
-
-        } catch(\Exception $e){
+            DB::commit();
+            return response()->json(true);
+        }
+        catch(\Exception $e){
             DB::rollBack();
 
-            return response()->json([
-                'errors' => $e->getMessage(),
-                'message' => 'Error!'
-            ]);
-        }
-    }
-
-    public function getFavoritedProducts(Request $request){
-        if(Auth::check()){
-            $products = FavoritedProduct::where('user_id', '=', Auth::user()->id)->with('product')->get();
-
-            return response()->json($products);
-        }
-        else{
-            return abort(404);
+            return response()->json($e->getMessage());
         }
     }
 }

@@ -1,45 +1,49 @@
-#authModal
-    .modal-dialog
-        .modal-centent
-            .modal-header
-                display: flex
-                h1.modal-title
-                    display: block
-                    margin-right: 10px
+input#user_avatar
+    display: none
 
-#register-form, #login-form
-    display: block
-    input
-        display: block
-    button
-        color: $light
-
-.social-buttons
-    width: 100%
+label.user_avatar_label
+    position: relative
+    width: 100px
+    height: 100px
     display: flex
-    flex-wrap: wrap
-    justify-content: center
-    align-items: center
-    a.social-button
+    margin-right: auto
+    margin-left: auto
+    border-radius: 50%
+    overflow: hidden
+    border: 3px solid $primary
+    box-sizing: border-box
+    img
+        width: 100%
+        height: 100%
+        object-fit: cover
+    .select-text
+        position: absolute
+        font-size: 10pt
+        text-align: center
+        bottom: 0
+        width: 100%
+        height: 100%
+        border-radius: 50%
         display: flex
-        justify-content: space-between
-        border: 1px solid $gray-300
-        border-radius: 5px
-        text-decoration: none
-        padding: 20px 
-        color: $dark
-        width: 49%
-        margin-right: 1%
-        margin-bottom: 1%
+        justify-content: center
         align-items: center
-        height: 75px
         transition: 0.3s
-        svg
-            display: block
-            width: 15%
-            height: auto
-            margin-right: 10px
-        span
-            display: block
+        color: $white
+        text-shadow: 0 0 3px $dark
         &:hover
-            border: 1px solid $gray-400
+            background: rgb($primary, 0.3)
+            cursor: pointer
+        &:active
+            background: rgb($primary, 1)
+
+.text-avatar
+    font-size: 32pt
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 100%
+    height: 100%
+    font-weight: 700
+    background: $primary
+    color: $light
+    text-transform: uppercase

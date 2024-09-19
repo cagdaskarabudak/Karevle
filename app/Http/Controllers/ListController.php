@@ -9,13 +9,9 @@ use App\Http\Controllers\CategoryController;
 
 class ListController extends Controller
 {
-    public function viewList(string $slug){
-        $list = Liste::where('slug', '=', $slug)->first();
-        $categories = Category::where('parent_category_id', '=', null)->get();
-        
-        return view('list')->with([
-            'list' => $list,
-            'categories' => $categories
-        ]);
+    public function viewList($slug){
+        $liste = Liste::where('slug', '=', $slug)->first();
+
+        return view('liste')->with('liste', $liste);
     }
 }

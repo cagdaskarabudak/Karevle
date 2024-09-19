@@ -9,6 +9,10 @@ class Product extends Model
 {
     use HasFactory;
 
+    //*********************************************************//
+    //SETTINGS --->
+    //*********************************************************//
+
     public $timestamps = true;
     protected $table = 'products';
     protected $fillable = [
@@ -17,6 +21,26 @@ class Product extends Model
         'price',
         'category_id',
     ];
+    protected $appends = [
+        'price_with_offers',
+        'keys',
+        'rate',
+        'created_date'
+    ];
+
+    protected $with = [
+        'images',
+        'content',
+        'comments',
+        'category',
+        'lists',
+        'offers',
+        'favoritedUsers'
+    ];
+
+    //*********************************************************//
+    //RELATIONSHIPS --->
+    //*********************************************************//
 
     public function images(){
         return $this->hasMany(ProductImage::class, 'product_id', 'id')->orderBy('sort');
@@ -42,13 +66,15 @@ class Product extends Model
         return $this->hasManyThrough(Offer::class, OfferProduct::class, 'product_id', 'id', 'id', 'offer_id');
     }
 
-    public function get_offers($type = null){
-        if ($type === 'rate' || $type === 'price') {
-            return $this->offers->where('amount_type', '=', $type);
-        }
+    public function favoritedUsers(){
+        return $this->hasManyThrough(User::class, FavoritedProduct::class, 'product_id', 'id', 'id', 'user_id');
     }
 
-    public function new_price(){
+    //*********************************************************//
+    //ATTRIBUTE METHODS --->
+    //*********************************************************//
+
+    public function getPriceWithOffersAttribute(){
         if(count($this->offers) > 0){
             $new_price = $this->price;
             foreach($this->get_offers('rate') as $offer){
@@ -57,15 +83,14 @@ class Product extends Model
             foreach($this->get_offers('price') as $offer){
                 $new_price = $new_price - $offer->amount;
             }
-
-            return $new_price;
+            return $this->new_price = number_format($new_price, 2);
         }
         else{
             return 0;
         }
     }
 
-    public function rate(){
+    public function getRateAttribute(){
         $totalrate = 0;
 
         foreach($this->comments as $comment){
@@ -79,8 +104,25 @@ class Product extends Model
         return $totalrate;
     }
 
-    public function favoritedUsers(){
-        return $this->hasManyThrough(User::class, FavoritedProduct::class, 'product_id', 'id', 'id', 'user_id');
+    public function getKeysAttribute(){
+        $words = explode(' ', $this->name);
+        $lowercaseWords = array_map('strtolower', $words);
+
+        return $lowercaseWords;
+    }
+
+    public function getCreatedDateAttribute(){
+        return strtotime($this->created_at);
+    }
+
+    //*********************************************************//
+    //METHODS --->
+    //*********************************************************//
+
+    public function get_offers($type = null){
+        if ($type === 'rate' || $type === 'price') {
+            return $this->offers->where('amount_type', '=', $type);
+        }
     }
 
     public function isFavoritedUser($userid){
@@ -94,14 +136,6 @@ class Product extends Model
         }
     }
 
-    public function getKeys(){
-        // Cümleyi boşluklara göre böler
-        $words = explode(' ', $this->name);
 
-        // Her kelimeyi küçük harfe dönüştürür
-        $lowercaseWords = array_map('strtolower', $words);
-
-        return $lowercaseWords;
-    }
     
 }

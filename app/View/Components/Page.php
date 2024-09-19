@@ -8,16 +8,20 @@ use Illuminate\View\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Models\Category;
+use App\Models\Liste;
 
 class Page extends Component
 {
     public string $title;
     public $categories;
+    public $lists;
 
     public function __construct(string $title) {
         $this->title = $title;
 
         $this->categories = Category::where('parent_category_id', '=', null)->get();
+
+        $this->lists = Liste::all();
     }
 
     /**

@@ -1,0 +1,70 @@
+.footer-div
+    position: absolute
+    left: 0
+    width: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+    z-index: 2
+    @include responsive('xs')
+        bottom: 60px
+        height: 80px
+    @include responsive('sm')
+        bottom: 60px
+        height: 80px
+    @include responsive('md')
+        bottom: 60px
+        height: 80px
+    @include responsive('lg')
+        bottom: 60px
+        height: 80px
+    @include responsive('xl')
+        bottom: 10px
+        height: 80px
+    @include responsive('xxl')
+        bottom: 10px
+        height: 80px
+    .footer
+        box-shadow: 0 0 1px $gray-500
+        height: 100%
+        background: $white
+        padding: 5px
+        display: flex
+        justify-content: center
+        align-items: center
+        flex-direction: column
+        @include responsive('xs')
+            width: 100%
+        @include responsive('sm')
+            width: 100%
+        @include responsive('md')
+            width: 100%
+        @include responsive('lg')
+            width: 100%
+        @include responsive('xl')
+            border-radius: 5px
+            width: 80%
+        @include responsive('xxl')
+            border-radius: 5px
+            width: 80%
+        .copy-text
+            width: 100%
+            display: flex
+            justify-content: center
+            height: 50%
+            align-items: center
+            text-align: center
+            font-size: 8pt
+        .footer-links
+            width: 100%
+            display: flex
+            justify-content: space-evenly
+            height: 50%
+            text-align: center
+            align-items: center
+            a
+                font-size: 8pt
+                text-decoration: none
+                color: $dark
+                &:hover
+                    color: $primary

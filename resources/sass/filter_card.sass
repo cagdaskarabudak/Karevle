@@ -1,0 +1,18 @@
+.filter-card
+    .filter-card-header
+        display: flex
+        justify-content: space-between
+        align-items: center
+    .filter-card-body
+        @include responsive('xs')
+            display: none
+        @include responsive('sm')
+            display: none
+        @include responsive('md')
+            display: none
+        @include responsive('lg')
+            display: block
+        @include responsive('xl')
+            display: block
+        @include responsive('xxl')
+            display: block

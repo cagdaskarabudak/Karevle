@@ -1,4 +1,4 @@
-class MainMethods{
+export default class MainMethods{
     createToast(message) {
         let toastContainer = document.querySelector('.toast-container');
         let liveToast = document.createElement('div');
@@ -22,10 +22,4 @@ class MainMethods{
         let toastBootstrap = bootstrap.Toast.getOrCreateInstance(liveToast);
         toastBootstrap.show();
     }
-
-    mobileAppNotf(){
-        document.querySelector('.mobile-app-notf').style.display = 'block';
-    }
 }
-
-export default MainMethods;

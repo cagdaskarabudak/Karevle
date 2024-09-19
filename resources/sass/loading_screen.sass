@@ -1,0 +1,71 @@
+$rotation-speed: 3s // Dönüş süresi değişkeni
+@mixin rotate
+  @keyframes spin
+    from
+      transform: rotate(0deg)
+    to
+      transform: rotate(360deg)
+  animation: spin $rotation-speed linear infinite
+
+.loading-screen
+    position: fixed
+    width: 100%
+    height: 100%
+    background: $light
+    z-index: 999999
+    display: none
+    @include responsive('xs')
+      display: flex
+    @include responsive('sm')
+      display: flex
+    @include responsive('md')
+      display: flex
+    justify-content: center
+    align-items: center
+    .logo
+        position: relative
+        border-radius: 50%
+        padding: 25px
+        width: 200px
+        height: 200px
+        display: flex
+        justify-content: center
+        align-items: center
+        .logo-svg
+            width: 100%
+            height: 100%
+            border-radius: 50%
+            position: absolute
+            background: $light
+            z-index: 1000001
+            padding: 10%
+            svg
+                width: 100%
+                height: 100%
+        .logo-back
+            position: absolute
+            width: 205px
+            height: 205px
+            background: linear-gradient(to right, $primary 50%, $info 75%, $success 100%)
+            border-radius: 50%
+            z-index: 1000000
+            @include rotate
+    .brand-text
+        position: fixed
+        top: calc(50% + 120px)
+        font-size: 18pt
+        text-decoration: none
+        letter-spacing: 5px
+        text-transform: uppercase
+        color: $primary
+        font-weight: 700
+    .copy-text
+        position: fixed
+        top: 90%
+        font-size: 8pt
+        text-decoration: none
+        font-weight: 300
+        letter-spacing: 5px
+        text-transform: uppercase
+        color: $primary
+

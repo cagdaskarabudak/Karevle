@@ -1,0 +1,52 @@
+<?php if (isset($component)) { $__componentOriginalbb0f46e9c87d433ff2eb407e479a8ac3 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginalbb0f46e9c87d433ff2eb407e479a8ac3 = $attributes; } ?>
+<?php $component = App\View\Components\Page::resolve(['title' => 'Ana Sayfa'] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('page'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\App\View\Components\Page::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique tempora ipsum saepe. Ullam rem sunt vero cupiditate, iusto, aliquid recusandae eos culpa, accusantium inventore numquam laborum dolore fuga. Fugiat, natus?
+    Perferendis mollitia accusantium perspiciatis maiores odio ab dolore blanditiis eius distinctio quaerat laboriosam cumque, at, consectetur, aliquam voluptate expedita cupiditate quae sed iusto non corporis ducimus! Recusandae velit quibusdam ab!
+    Veritatis adipisci ab deleniti suscipit voluptatibus quasi necessitatibus mollitia? Incidunt soluta dolore minus suscipit, accusamus aliquid quasi id error fugit itaque laudantium, iste nisi pariatur sunt, totam atque voluptate reiciendis!
+    Fuga eum in alias fugiat ullam saepe molestias voluptatibus, consectetur at labore similique ipsum maiores odio quam optio accusamus distinctio nulla aliquam! Repellendus ad dolor quo tempore magnam, dicta debitis?
+    Voluptates, minima cupiditate molestias omnis nisi perferendis veniam, corporis laboriosam ipsam deserunt numquam. Quasi cupiditate error provident similique modi, quas enim quibusdam, optio eaque reprehenderit rerum, voluptas aut at nesciunt!
+    Quia, nemo? Animi, perspiciatis libero vel veritatis ad iusto sequi expedita. Beatae quo eius impedit neque nulla culpa voluptate dolore sapiente commodi sed accusamus blanditiis a autem molestias, rem dolorem.
+    Omnis neque quo nam delectus porro, tempore in. Nisi reiciendis, maiores debitis harum perspiciatis id, explicabo repellat sed velit omnis ipsa earum voluptatibus placeat corrupti accusamus quo tenetur. Eos, placeat?
+    Excepturi harum id hic corrupti cum ratione aut placeat ullam inventore quis vel voluptas libero alias ex iste rem, perspiciatis error impedit cumque repellendus perferendis nisi? Unde porro obcaecati atque.
+    Nam accusamus, maxime, voluptatum animi ipsum incidunt natus numquam, modi adipisci placeat fugit cupiditate! Ullam rerum doloribus tempore. Mollitia placeat ipsa quibusdam nulla distinctio reprehenderit corporis vero eveniet sapiente in.
+    Tempora, autem ea? Voluptatibus quibusdam porro inventore repudiandae architecto recusandae totam assumenda ad. Hic assumenda soluta id expedita eligendi, temporibus explicabo, natus deleniti dicta necessitatibus, repellat ratione rem praesentium exercitationem!
+    Voluptatem porro aut iusto vel pariatur corrupti nostrum inventore soluta labore explicabo. Atque fugiat eos consequuntur mollitia temporibus, obcaecati ad cumque vitae sunt. Porro fuga id vero nihil ipsam autem.
+    Iste at praesentium quod repudiandae fugit impedit veniam, dicta, aut nisi nam quas fugiat adipisci? Consequatur perferendis, id saepe eum iste repudiandae voluptas aspernatur placeat esse suscipit eaque omnis recusandae!
+    Ab corporis accusantium quae id doloribus beatae ex. Atque veritatis ipsum eius quo earum voluptatem quas reiciendis expedita dolore totam corrupti itaque ullam harum, nulla iste sapiente! Tempora, corrupti! Similique.
+    Nemo ex, nobis suscipit accusantium voluptatibus fuga asperiores nihil cum facilis illo alias sit ut officiis voluptatem inventore similique iusto nostrum quod, illum commodi? Exercitationem molestias enim quam nulla repellat!
+    Esse explicabo modi, qui non cupiditate earum fugit dolores sit, commodi quae, exercitationem architecto nulla. Voluptatem illo itaque facilis libero impedit debitis, reiciendis cumque cupiditate rem doloribus est, perferendis eum.
+    Saepe deserunt illum maxime adipisci itaque molestiae asperiores fugiat quaerat quod quidem reprehenderit exercitationem quam optio culpa distinctio, architecto totam, quas, animi voluptas aperiam nemo eveniet repellat. Omnis, itaque eligendi!
+    Sed, fugiat nulla! Quo, saepe. Possimus, magnam perspiciatis optio quaerat animi fugit aperiam nam odio, temporibus voluptatem fuga doloribus repudiandae deleniti. Amet repellat sapiente dolorem similique dolor incidunt dolore natus!
+    Sint possimus, doloremque nostrum autem alias adipisci molestias? Ab beatae suscipit cum voluptatem eligendi officiis mollitia rerum sapiente veniam odio! Voluptatibus quaerat iure minus rerum nisi, delectus nihil nostrum officiis.
+    Perspiciatis harum quos dolorum pariatur laudantium sunt ducimus praesentium dolore animi? Quae ipsam, accusamus neque porro ea optio minima odio totam ipsum vel itaque facere dolor, labore id quaerat officiis!
+    Quos, quidem. Id perferendis dolore voluptatem doloribus expedita laudantium ad labore recusandae corporis pariatur ut iure, natus assumenda quidem architecto doloremque libero error ipsum placeat debitis deleniti voluptates aliquam consequuntur!
+    Architecto dicta quisquam asperiores saepe cumque debitis recusandae quia? Temporibus quidem, quibusdam dicta ipsa reiciendis qui ad doloribus accusantium atque quo quis consequuntur quam facere provident dolor aperiam incidunt voluptatem?
+    Perferendis nemo officiis voluptas reiciendis dolores eos deleniti impedit atque temporibus labore, sit sequi accusantium culpa sunt libero fugit, modi autem expedita laudantium animi, cupiditate saepe. Nihil minus et vero.
+    Quam provident officiis sit dicta nostrum facilis asperiores eaque temporibus sunt, in tempore aperiam harum atque tempora eum vero esse laudantium vel qui, soluta reiciendis nihil tenetur rem voluptate. Iste?
+    Cumque officia distinctio blanditiis deleniti quae veritatis, repellendus eligendi assumenda architecto reprehenderit aliquid laborum. Voluptates, obcaecati. Adipisci maiores voluptatum neque suscipit expedita? Dolorem distinctio quisquam perferendis suscipit velit natus explicabo?
+    Ullam at beatae tempora atque numquam itaque culpa vel, magnam sunt adipisci quod omnis iure incidunt voluptatibus rem ea sapiente dolore enim corporis minus amet, tempore tenetur? Nisi, fuga expedita!
+    Suscipit nostrum unde adipisci eos sint commodi, laudantium cupiditate et porro labore facere at veritatis veniam assumenda eum rem quia id incidunt, voluptas nulla culpa, molestiae aspernatur? Porro, animi iusto?
+    Eveniet et eos dolorem harum ratione sapiente dolorum a praesentium ipsam? Odit explicabo quo architecto provident molestiae aspernatur saepe sint id, accusamus quis maxime dolore ex aliquid soluta natus odio.
+    Ipsum dolorum minus, modi nihil, vitae ab optio laudantium ipsa unde nam consequatur eius suscipit, eaque ut. Exercitationem, expedita neque! Nesciunt rem ipsa commodi illum eligendi tempora, cumque est autem.
+    Debitis architecto accusamus illo placeat saepe. Magni placeat quas vitae officia, commodi magnam tempora animi cupiditate dolorum odio impedit iure necessitatibus nobis veniam perferendis exercitationem maiores reiciendis qui eveniet. Aliquid!
+    Molestiae ullam dolore veritatis natus, necessitatibus eligendi voluptates itaque inventore, assumenda eaque, aliquid nulla tempora quaerat nihil quae totam. Minus magnam voluptatem sit ut, consequatur ipsa dicta accusamus enim ipsum.
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginalbb0f46e9c87d433ff2eb407e479a8ac3)): ?>
+<?php $attributes = $__attributesOriginalbb0f46e9c87d433ff2eb407e479a8ac3; ?>
+<?php unset($__attributesOriginalbb0f46e9c87d433ff2eb407e479a8ac3); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalbb0f46e9c87d433ff2eb407e479a8ac3)): ?>
+<?php $component = $__componentOriginalbb0f46e9c87d433ff2eb407e479a8ac3; ?>
+<?php unset($__componentOriginalbb0f46e9c87d433ff2eb407e479a8ac3); ?>
+<?php endif; ?>
+
+<?php /**PATH /Users/cagdaskarabudak/Desktop/Projects/E-Commerce/KarevleLaravel/resources/views/home.blade.php ENDPATH**/ ?>

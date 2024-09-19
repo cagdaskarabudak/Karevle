@@ -4,21 +4,22 @@ import bootstrap from 'bootstrap/dist/js/bootstrap.bundle';
 window.bootstrap = bootstrap;
 import 'alpagu-icons/js/all';
 
-import 'zoomist/css';
-import Zoomist from 'zoomist';
-window.Zoomist = Zoomist;
-
-import ShoppingCard from './shopping-card';
-window.shoppingCard = new ShoppingCard();
-
-import Favorites from './favorite';
-window.favorites = new Favorites();
+import Swiper from 'swiper/bundle';
+import 'swiper/css/bundle';
+window.Swiper = Swiper;
 
 import MainMethods from './main';
 window.mainmethods = new MainMethods();
 
-import Filter from './filter';
-window.filter = new Filter();
+import './navbar';
+import './profile';
 
-import Product from './dashboard-product';
-window.Product = Product;
+document.addEventListener('DOMContentLoaded', function(){
+    let loadingScreen = document.querySelector('.loading-screen');
+    $(loadingScreen).hide();
+});
+
+import './filter-card';
+import './product_card';
+import './search';
+import './search-md';

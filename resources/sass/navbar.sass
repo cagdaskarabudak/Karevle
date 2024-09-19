@@ -1,0 +1,1043 @@
+.mobile-navbar
+    display: flex
+    justify-content: center
+    align-items: center
+    background: $white
+    height: 60px
+    box-shadow: 0 0 1px $gray-500
+    position: fixed
+    top: 0
+    width: 100%
+    z-index: 999
+    @include responsive('xl')
+        display: none
+    @include responsive('xxl')
+        display: none
+    .brand
+        @include responsive('xs')
+            height: 100%
+            width: 15%
+            display: flex
+            justify-content: space-between
+            align-items: center
+        @include responsive('sm')
+            height: 100%
+            width: 15%
+            display: flex
+            justify-content: space-between
+            align-items: center
+        @include responsive('md')
+            height: 100%
+            width: 15%
+            display: flex
+            justify-content: space-between
+            align-items: center
+        @include responsive('lg')
+            height: 100%
+            width: 15%
+            display: flex
+            justify-content: space-between
+            align-items: center
+        svg
+            height: 90%
+    .search-div
+        @include responsive('xs')
+            display: flex
+            background: $white
+            width: 85%
+            height: 100%
+            form
+                display: flex
+                width: 100%
+                height: 100%
+                input.search
+                    background: transparent
+                    width: 100%
+                    height: 100%
+                    border: none
+                    padding-left: 10px 
+                    &:focus
+                        outline: none
+                button.btn-submit
+                    width: 5%
+                    height: 100%
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    border-radius: 0 5px 5px 0
+                    border: none
+                    background: transparent
+                    color: $primary
+            .search-results
+                display: none
+                position: absolute
+                width: 100%
+                left: 0
+                min-height: 200%
+                max-height: 600%
+                top: 100%
+                background: $white
+                z-index: 1001
+                border-bottom: 3px solid $primary
+                overflow: auto
+                .list
+                    padding: 10px
+                    .title
+                        font-size: 10pt
+                        padding: 5px
+                        color: $primary
+                        font-weight: 700
+                    .items
+                        display: flex
+                        flex-direction: column
+                        align-items: center
+                        justify-content: center
+                        padding-right: 10px
+                        padding-left: 10px 
+                        .search-item
+                            width: 100%
+                            font-size: 10pt
+                            text-decoration: none
+                            color: $dark
+                            border-bottom: 0.5px solid $gray-500
+                            padding: 10px
+                            transition: 0.3s
+                            &:hover
+                                background: tint-color($secondary, 90)
+        @include responsive('sm')
+            display: flex
+            background: $white
+            overflow: hidden
+            width: 85%
+            height: 100%
+            form
+                display: flex
+                width: 100%
+                height: 100%
+                input.search
+                    background: transparent
+                    width: 100%
+                    height: 100%
+                    border: none
+                    padding-left: 10px 
+                    &:focus
+                        outline: none
+                button.btn-submit
+                    width: 5%
+                    height: 100%
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    border-radius: 0 5px 5px 0
+                    border: none
+                    background: transparent
+                    color: $primary
+            .search-results
+                display: none
+                position: absolute
+                width: 100%
+                left: 0
+                min-height: 200%
+                max-height: 600%
+                top: 100%
+                background: $white
+                z-index: 1001
+                border-bottom: 3px solid $primary
+                overflow: auto
+                .list
+                    padding: 10px
+                    .title
+                        font-size: 10pt
+                        padding: 5px
+                        color: $primary
+                        font-weight: 700
+                    .items
+                        display: flex
+                        flex-direction: column
+                        align-items: center
+                        justify-content: center
+                        padding-right: 10px
+                        padding-left: 10px 
+                        .search-item
+                            width: 100%
+                            font-size: 10pt
+                            text-decoration: none
+                            color: $dark
+                            border-bottom: 0.5px solid $gray-500
+                            padding: 10px
+                            transition: 0.3s
+                            &:hover
+                                background: tint-color($secondary, 90)
+        @include responsive('md')
+            display: flex
+            background: $white
+            overflow: hidden
+            width: 85%
+            height: 100%
+            form
+                display: flex
+                width: 100%
+                height: 100%
+                input.search
+                    background: transparent
+                    width: 100%
+                    height: 100%
+                    border: none
+                    padding-left: 10px 
+                    &:focus
+                        outline: none
+                button.btn-submit
+                    width: 5%
+                    height: 100%
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    border-radius: 0 5px 5px 0
+                    border: none
+                    background: transparent
+                    color: $primary
+            .search-results
+                display: none
+                position: absolute
+                width: 100%
+                left: 0
+                min-height: 200%
+                max-height: 600%
+                top: 100%
+                background: $white
+                z-index: 1001
+                border-bottom: 3px solid $primary
+                overflow: auto
+                .list
+                    padding: 10px
+                    .title
+                        font-size: 10pt
+                        padding: 5px
+                        color: $primary
+                        font-weight: 700
+                    .items
+                        display: flex
+                        flex-direction: column
+                        align-items: center
+                        justify-content: center
+                        padding-right: 10px
+                        padding-left: 10px 
+                        .search-item
+                            width: 100%
+                            font-size: 10pt
+                            text-decoration: none
+                            color: $dark
+                            border-bottom: 0.5px solid $gray-500
+                            padding: 10px
+                            transition: 0.3s
+                            &:hover
+                                background: tint-color($secondary, 90)
+        @include responsive('lg')
+            display: flex
+            background: $white
+            overflow: hidden
+            width: 85%
+            height: 100%
+            form
+                display: flex
+                width: 100%
+                height: 100%
+                input.search
+                    background: transparent
+                    width: 100%
+                    height: 100%
+                    border: none
+                    padding-left: 10px 
+                    &:focus
+                        outline: none
+                button.btn-submit
+                    width: 5%
+                    height: 100%
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    border-radius: 0 5px 5px 0
+                    border: none
+                    background: transparent
+                    color: $primary
+            .search-results
+                display: none
+                position: absolute
+                width: 100%
+                left: 0
+                min-height: 200%
+                max-height: 600%
+                top: 100%
+                background: $white
+                z-index: 1001
+                border-bottom: 3px solid $primary
+                overflow: auto
+                .list
+                    padding: 10px
+                    .title
+                        font-size: 10pt
+                        padding: 5px
+                        color: $primary
+                        font-weight: 700
+                    .items
+                        display: flex
+                        flex-direction: column
+                        align-items: center
+                        justify-content: center
+                        padding-right: 10px
+                        padding-left: 10px 
+                        .search-item
+                            width: 100%
+                            font-size: 10pt
+                            text-decoration: none
+                            color: $dark
+                            border-bottom: 0.5px solid $gray-500
+                            padding: 10px
+                            transition: 0.3s
+                            &:hover
+                                background: tint-color($secondary, 90)
+        @include responsive('xl')
+            display: none
+        @include responsive('xxl')
+            display: none
+    
+.nav-div
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 100%
+    z-index: 3
+    @include responsive('xs')
+        position: fixed
+        left: 0
+        bottom: 0
+        height: 60px
+        .navbar
+            box-shadow: 0 0 1px $gray-500
+            width: 100%
+            background-color: rgba(255, 255, 255, 1)
+    @include responsive('sm')
+        position: fixed
+        left: 0
+        bottom: 0
+        height: 60px
+        .navbar
+            box-shadow: 0 0 1px $gray-500
+            width: 100%
+            background-color: rgba(255, 255, 255, 1)
+    @include responsive('md')
+        position: fixed
+        left: 0
+        bottom: 0
+        height: 60px
+        .navbar
+            box-shadow: 0 0 1px $gray-500
+            width: 100%
+            background-color: rgba(255, 255, 255, 1)
+    @include responsive('lg')
+        position: fixed
+        left: 0
+        bottom: 0
+        height: 60px
+        .navbar
+            box-shadow: 0 0 1px $gray-500
+            width: 100%
+            background-color: rgba(255, 255, 255, 1)
+    @include responsive('xl')
+        position: absolute
+        left: 0
+        top: 0
+        height: 130px
+        &.fixed-nav-div
+            position: fixed
+            left: 0
+            top: 10px
+            backdrop-filter: blur(5px)
+            .navbar
+                box-shadow: 0 0 3px $gray-500
+                width: 80%
+                border-radius: 5px
+                background-color: rgba(255, 255, 255, 0.6)
+        .navbar
+            box-shadow: 0 0 1px $gray-500
+            width: 100%
+            background-color: rgba(255, 255, 255, 1)
+    @include responsive('xxl')
+        position: absolute
+        left: 0
+        top: 0
+        height: 130px
+        &.fixed-nav-div
+            position: fixed
+            left: 0
+            top: 10px
+            backdrop-filter: blur(5px)
+            .navbar
+                box-shadow: 0 0 3px $gray-500
+                width: 80%
+                border-radius: 5px
+                background-color: rgba(255, 255, 255, 0.6)
+        .navbar
+            box-shadow: 0 0 1px $gray-500
+            width: 100%
+            background-color: rgba(255, 255, 255, 1)
+    .navbar
+        height: 100%
+        padding: 5px
+        transition: 0.5s
+        @include responsive('xs')
+            box-shadow: 0 0 3px $gray-500
+            border-radius: 0
+            width: 100%
+        @include responsive('sm')
+            box-shadow: 0 0 3px $gray-500
+            border-radius: 0
+            width: 100%
+        @include responsive('md')
+            box-shadow: 0 0 3px $gray-500
+            border-radius: 0
+            width: 100%
+        @include responsive('lg')
+            box-shadow: 0 0 3px $gray-500
+            border-radius: 0
+            width: 100%
+        .navbar-top
+            width: 100%
+            height: 70%
+            @include responsive('xs')
+                display: none
+            @include responsive('sm')
+                display: none
+            @include responsive('md')
+                display: none
+            @include responsive('lg')
+                display: none
+            @include responsive('xl')
+                display: flex
+                align-items: center
+            @include responsive('xxl')
+                display: flex
+                align-items: center
+            .brand
+                @include responsive('xs')
+                    display: none
+                @include responsive('sm')
+                    display: none
+                @include responsive('md')
+                    display: none
+                @include responsive('lg')
+                    display: none
+                @include responsive('xl')
+                    height: 90%
+                    width: 15%
+                    display: flex
+                    justify-content: space-between
+                    align-items: center
+                @include responsive('xxl')
+                    height: 90%
+                    width: 15%
+                    display: flex
+                    justify-content: space-between
+                    align-items: center
+                svg
+                    height: 90%
+            .search-div
+                position: relative
+                background: $light
+                transition: 0.3s
+                &.open
+                    border: 1px solid $primary
+                    background: $white
+                    border-radius: 5px 5px 0 0
+                    form
+                        input.search
+                            border-radius: 0 5px 0 0
+                        button.btn-submit
+                            border: none
+                            border-left: 1px solid $primary
+                    .search-results
+                        border-radius: 0 0 5px 5px
+                        border: 1px solid $primary
+                @include responsive('xs')
+                    display: none
+                @include responsive('sm')
+                    display: none
+                @include responsive('md')
+                    display: none
+                @include responsive('lg')
+                    display: none
+                @include responsive('xl')
+                    display: flex
+                    border-radius: 5px
+                    width: 50%
+                    height: 50%
+                @include responsive('xxl')
+                    display: flex
+                    border-radius: 5px
+                    width: 50%
+                    height: 50%
+                form
+                    display: flex
+                    width: 100%
+                    height: 100%
+                    input.search
+                        background: transparent
+                        width: 100%
+                        height: 100%
+                        border: none
+                        padding-left: 10px 
+                        &:focus
+                            outline: none
+                    button.btn-submit
+                        width: 5%
+                        height: 100%
+                        display: flex
+                        justify-content: center
+                        align-items: center
+                        border-radius: 0 5px 5px 0
+                        border: none
+                        background: transparent
+                        color: $primary
+                .search-results
+                    display: none
+                    position: absolute
+                    width: 100%
+                    left: 0
+                    min-height: 100px
+                    max-height: 500px
+                    top: 100%
+                    background: $white
+                    z-index: 1001
+                    overflow-y: scroll
+                    .list
+                        padding: 10px
+                        .title
+                            font-size: 10pt
+                            padding: 5px
+                            color: $primary
+                            font-weight: 700
+                        .items
+                            display: flex
+                            flex-direction: column
+                            align-items: center
+                            justify-content: center
+                            padding-right: 10px
+                            padding-left: 10px 
+                            .search-item
+                                width: 100%
+                                font-size: 10pt
+                                text-decoration: none
+                                color: $dark
+                                border-bottom: 0.5px solid $gray-500
+                                padding: 10px
+                                transition: 0.3s
+                                &:hover
+                                    background: tint-color($secondary, 90)
+            .user-menu
+                @include responsive('xs')
+                    display: none
+                @include responsive('sm')
+                    display: none
+                @include responsive('md')
+                    display: none
+                @include responsive('lg')
+                    display: none
+                @include responsive('xl')
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    width: 35%
+                    height: 50%
+                    font-weight: 100
+                @include responsive('xxl')
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    width: 35%
+                    height: 50%
+                    font-weight: 300
+                .menu-item
+                    text-decoration: none
+                    display: flex
+                    align-items: center
+                    justify-content: center
+                    border-radius: 5px
+                    margin-right: 5px
+                    margin-left: 5px
+                    height: max-content
+                    padding-right: 5px
+                    padding-left: 5px
+                    color: $dark
+                    transition: 0.3s
+                    &.menu-item-primary
+                        &:hover
+                            color: $primary
+                    &.menu-item-secondary
+                        &:hover
+                            color: $secondary
+                    &.menu-item-success
+                        &:hover
+                            color: $success
+                    &.menu-item-danger
+                        &:hover
+                            color: $danger
+                    &.menu-item-warning
+                        &:hover
+                            color: $warning
+                    &.menu-item-dark
+                        &:hover
+                            color: $dark
+                    &.menu-item-info
+                        &:hover
+                            color: $info
+                    svg
+                        margin-right: 5px
+                    &.active
+                        color: $primary
+                    &.active-primary
+                        color: $primary
+                    &.active-secondary
+                        color: $secondary
+                    &.active-success
+                        color: $success
+                    &.active-danger
+                        color: $danger
+                    &.active-warning
+                        color: $warning
+                    &.active-dark
+                        color: $dark
+                    &.active-info
+                        color: $info
+                    &:hover
+                        color: $primary
+                .dropdown
+                    .menu-item
+                        text-decoration: none
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        border-radius: 5px
+                        margin-right: 5px
+                        margin-left: 5px
+                        height: max-content
+                        padding-right: 5px
+                        padding-left: 5px
+                        color: $dark
+                        transition: 0.3s
+                        svg
+                            margin-right: 5px
+                        &.active
+                            color: $primary
+                        &:hover
+                            color: $primary
+                        &.show
+                            color: $primary
+        .navbar-bottom
+            display: flex
+            justify-content: space-between
+            align-items: center
+            width: 100%
+            @include responsive('xs')
+                height: 100%
+            @include responsive('sm')
+                height: 100%
+            @include responsive('md')
+                height: 100%
+            @include responsive('lg')
+                height: 100%
+            @include responsive('xl')
+                height: 30%
+            @include responsive('xxl')
+                height: 30%
+            .brand
+                height: 100%
+                font-size: 18pt
+                text-decoration: none
+                font-weight: 300
+                letter-spacing: 5px
+                text-transform: uppercase
+                @include responsive('xs')
+                    display: none
+                @include responsive('sm')
+                    display: none
+                @include responsive('md')
+                    display: none
+                @include responsive('lg')
+                    display: none
+                @include responsive('xl')
+                    width: 15%
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                @include responsive('xxl')
+                    width: 15%
+                    display: flex
+                    justify-content: center
+                    align-items: center
+            .menu
+                display: flex
+                align-items: center
+                @include responsive('xs')
+                    width: 100%
+                    height: 100%
+                    justify-content: center
+                @include responsive('sm')
+                    width: 100%
+                    height: 100%
+                    justify-content: center
+                @include responsive('md')
+                    width: 100%
+                    height: 100%
+                    justify-content: center
+                @include responsive('lg')
+                    width: 100%
+                    height: 100%
+                    justify-content: center
+                @include responsive('xl')
+                    width: 85%
+                    justify-content: center
+                @include responsive('xxl')
+                    width: 85%
+                    justify-content: center
+                .menu-item
+                    margin-right: 5%
+                    text-decoration: none
+                    border-radius: 5px
+                    color: $dark
+                    transition: 0.3s
+                    @include responsive('xs')
+                        display: flex
+                        justify-content: center
+                        align-items: center
+                        height: 100%
+                        padding: 1%
+                        a.menu-item
+                            margin-right: 0
+                        span
+                            display: none
+                        svg
+                            height: 50%
+                        &.list-item
+                            display: none
+                        &.active
+                            color: $primary
+                            svg
+                                height: 75%
+                        &.active-primary
+                            color: $primary
+                        &.active-secondary
+                            color: $secondary
+                        &.active-success
+                            color: $success
+                        &.active-danger
+                            color: $danger
+                        &.active-warning
+                            color: $warning
+                        &.active-dark
+                            color: $dark
+                        &.active-info
+                            color: $info
+                        &:hover
+                            color: $primary
+                        &.show
+                            color: $primary
+                            svg
+                                height: 75%
+                    @include responsive('sm')
+                        display: flex
+                        flex-direction: column
+                        justify-content: center
+                        align-items: center
+                        height: 100%
+                        padding: 1%
+                        a.menu-item
+                            margin-right: 0
+                            height: 100%
+                            padding: 0
+                            display: flex
+                            flex-direction: column
+                        svg
+                            height: 50%
+                        &.list-item
+                            display: none
+                        &.active
+                            color: $primary
+                            svg
+                                height: 75%
+                            span
+                                font-weight: 500
+                        &.active-primary
+                            color: $primary
+                        &.active-secondary
+                            color: $secondary
+                        &.active-success
+                            color: $success
+                        &.active-danger
+                            color: $danger
+                        &.active-warning
+                            color: $warning
+                        &.active-dark
+                            color: $dark
+                        &.active-info
+                            color: $info
+                        &:hover
+                            color: $primary
+                        &.show
+                            color: $primary
+                            svg
+                                height: 75%
+                            span
+                                font-weight: 500
+                    @include responsive('md')
+                        display: flex
+                        flex-direction: column
+                        justify-content: center
+                        align-items: center
+                        height: 100%
+                        font-weight: 300
+                        padding: 1%
+                        a.menu-item
+                            margin-right: 0
+                            height: 100%
+                            padding: 0
+                            display: flex
+                            flex-direction: column
+                        svg
+                            height: 50%
+                        &.list-item
+                            display: none
+                        &.active
+                            color: $primary
+                            svg
+                                height: 75%
+                            span
+                                font-weight: 500
+                        &.active-primary
+                            color: $primary
+                        &.active-secondary
+                            color: $secondary
+                        &.active-success
+                            color: $success
+                        &.active-danger
+                            color: $danger
+                        &.active-warning
+                            color: $warning
+                        &.active-dark
+                            color: $dark
+                        &.active-info
+                            color: $info
+                        &.show
+                            color: $primary
+                            svg
+                                height: 75%
+                            span
+                                font-weight: 500
+                    @include responsive('lg')
+                        display: flex
+                        flex-direction: column
+                        justify-content: center
+                        align-items: center
+                        height: 100%
+                        padding: 1%
+                        font-weight: 300
+                        a.menu-item
+                            margin-right: 0
+                            height: 100%
+                            padding: 0
+                            display: flex
+                            flex-direction: column
+                        svg
+                            height: 50%
+                        &.list-item
+                            display: none
+                        &.active
+                            color: $primary
+                            svg
+                                height: 75%
+                            span
+                                font-weight: 500
+                        &.active-primary
+                            color: $primary
+                        &.active-secondary
+                            color: $secondary
+                        &.active-success
+                            color: $success
+                        &.active-danger
+                            color: $danger
+                        &.active-warning
+                            color: $warning
+                        &.active-dark
+                            color: $dark
+                        &.active-info
+                            color: $info
+                        &:hover
+                            color: $primary
+                        &.show
+                            color: $primary
+                            svg
+                                height: 75%
+                            span
+                                font-weight: 500
+                    @include responsive('xl')
+                        display: flex
+                        justify-content: center
+                        align-items: center
+                        font-weight: 300
+                        &.menu-item-primary
+                            &:hover
+                                color: $primary
+                        &.menu-item-secondary
+                            &:hover
+                                color: $secondary
+                        &.menu-item-success
+                            &:hover
+                                color: $success
+                        &.menu-item-danger
+                            &:hover
+                                color: $danger
+                        &.menu-item-warning
+                            &:hover
+                                color: $warning
+                        &.menu-item-dark
+                            &:hover
+                                color: $dark
+                        &.menu-item-info
+                            &:hover
+                                color: $info
+                        &.dropdown
+                            a
+                                display: flex
+                                justify-content: center
+                                align-items: center
+                                font-weight: 300
+                                span
+                                    display: block
+                                svg
+                                    margin-right: 3px
+                                &.active
+                                    color: $primary
+                                &.show
+                                    color: $primary
+                                &:hover
+                                    color: $primary
+                        span
+                            display: block
+                        svg
+                            margin-right: 3px
+                        &.user-item
+                            display: none
+                        &.active
+                            color: $primary
+                        &.active-primary
+                            color: $primary
+                        &.active-secondary
+                            color: $secondary
+                        &.active-success
+                            color: $success
+                        &.active-danger
+                            color: $danger
+                        &.active-warning
+                            color: $warning
+                        &.active-dark
+                            color: $dark
+                        &.active-info
+                            color: $info
+                        &:hover
+                            color: $primary
+                        &.show
+                            color: $primary
+                    @include responsive('xxl')
+                        display: flex
+                        justify-content: center
+                        align-items: center
+                        font-weight: 300
+                        &.menu-item-primary
+                            &:hover
+                                color: $primary
+                        &.menu-item-secondary
+                            &:hover
+                                color: $secondary
+                        &.menu-item-success
+                            &:hover
+                                color: $success
+                        &.menu-item-danger
+                            &:hover
+                                color: $danger
+                        &.menu-item-warning
+                            &:hover
+                                color: $warning
+                        &.menu-item-dark
+                            &:hover
+                                color: $dark
+                        &.menu-item-info
+                            &:hover
+                                color: $info
+                        &.dropdown
+                            a
+                                display: flex
+                                justify-content: center
+                                align-items: center
+                                font-weight: 300
+                                span
+                                    display: block
+                                svg
+                                    margin-right: 3px
+                                &.active
+                                    color: $primary
+                                &.show
+                                    color: $primary
+                                &:hover
+                                    color: $primary
+                        span
+                            display: block
+                        svg
+                            margin-right: 3px
+                        &.user-item
+                            display: none
+                        &.active
+                            color: $primary
+                        &.active-primary
+                            color: $primary
+                        &.active-secondary
+                            color: $secondary
+                        &.active-success
+                            color: $success
+                        &.active-danger
+                            color: $danger
+                        &.active-warning
+                            color: $warning
+                        &.active-dark
+                            color: $dark
+                        &.active-info
+                            color: $info
+                        &:hover
+                            color: $primary
+                        &.show
+                            color: $primary
+
+.user-avatar-image
+    width: 25px
+    height: 25px
+    border-radius: 50%
+    object-fit: cover
+    border: 1px solid $primary
+    box-sizing: border-box
+    margin-right: 10px
+
+
+.user-text-avatar
+    width: 25px
+    height: 25px
+    border-radius: 50%
+    border: 1px solid $primary
+    box-sizing: border-box
+    display: flex
+    align-items: center
+    justify-content: center
+    background: $primary
+    color: $light
+    font-size: 10pt
+    font-weight: 700
+    margin-right: 10px
+    
+@import './all_categories'

@@ -11,64 +11,73 @@ $light: #f5f5f9
 @import 'bootstrap/scss/mixins'
 @import 'bootstrap'
 
+@mixin responsive($breakpoint)
+    @if $breakpoint == 'xs'
+        @media (max-width: 575px)
+            @content
+    @else if $breakpoint == 'sm'
+        @media (min-width: 576px) and (max-width: 767px)
+            @content
+    @else if $breakpoint == 'md'
+        @media (min-width: 768px) and (max-width: 991px)
+            @content
+    @else if $breakpoint == 'lg'
+        @media (min-width: 992px) and (max-width: 1199px)
+            @content
+    @else if $breakpoint == 'xl'
+        @media (min-width: 1200px) and (max-width: 1399px)
+            @content
+    @else if $breakpoint == 'xxl'
+        @media (min-width: 1400px)
+            @content
+
 body
     position: relative
-    background-color: #f5f5f9
+    background-color: $light
 
 .content-wrapper
-    padding-top: 20px
-    padding-bottom: 20px
-    padding-left: 20px
-    padding-right: 20px
-    min-height: 768px
-
-.mobile-app-notf
-    position: fixed
-    display: none
-    width: 100%
-    z-index: 9999
-    background: $light
-    height: 75px
-    bottom: 0
-    border: 1px solid $gray-300
-    border-radius: 5px 5px 0 0
-    box-shadow: 0 -1px 1px $gray-500
-    button.btn-close
-        position: absolute
-        right: 0
-        top: 0
-        font-size: 8pt
-        padding: 10px
-    .content
-        display: flex
-        flex-direction: column
-        justify-content: center
-        align-items: center
+    z-index: 1
+    @include responsive('xs')
+        padding-top: 70px
+        padding-bottom: 150px
+        min-height: 768px
         width: 100%
-        height: 100%
-        padding: 10px
-        span
-            color: $primary
-            font-weight: 700
-        button
-            display: flex
-            justify-content: center
-            align-items: center
-            width: 20%
-            height: 100%
-            border-radius: 5px
-            color: $light
-            background: $primary
-            border: none
-            padding: 5px
+    @include responsive('sm')
+        padding-top: 70px
+        padding-bottom: 150px
+        min-height: 768px
+        width: 100%
+    @include responsive('md')
+        padding-top: 70px
+        padding-bottom: 150px
+        min-height: 768px
+        width: 100%
+    @include responsive('lg')
+        padding-top: 70px
+        padding-bottom: 150px
+        min-height: 768px
+        width: 100%
+    @include responsive('xl')
+        padding-top: 150px
+        padding-bottom: 100px
+        min-height: 768px
+        width: 100%
+    @include responsive('xxl')
+        padding-top: 150px
+        padding-bottom: 100px
+        min-height: 768px
+        width: 100%
 
-@import './header-footer'
+::selection
+    background: tint-color($primary, 50)
+    color: $light
+    text-shadow: 0 0 5px $primary
+
+@import './navbar'
+@import './footer'
+@import './loading_screen'
 @import './auth'
-@import './highlights'
-@import './profile'
+@import './favorites'
 @import './product'
-@import './list'
-@import './slider'
-@import './shopping-card'
-
-@import './dashboard/products'
+@import './filter_card'
+@import './profile'

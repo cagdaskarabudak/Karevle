@@ -1,0 +1,122 @@
+.offcanvas-header
+    box-shadow: 0 0 1px $gray-500
+    .offcanvas-title
+        text-decoration: none
+        display: flex
+        align-items: center
+        svg
+            width: 15%
+
+.offcanvas-body
+    padding: 0
+    .offcanvas-menu
+        margin: 0
+        padding: 0
+        width: 100%
+        list-style-type: none
+        padding-right: 5%
+        padding-left: 5%
+        .menu-item
+            text-decoration: none
+            color: $dark
+            width: 100%
+            height: 100%
+            margin-top: 5px
+            &.active
+                a
+                    background: tint-color($info, 75)
+                    color: $info
+                    &:hover
+                        background: tint-color($info, 75)
+                        color: $info
+            &.open
+                .menu-sub
+                    display: block
+            a
+                padding: 10px
+                width: 100%
+                height: 100%
+                margin: 0
+                display: flex
+                justify-content: space-between
+                align-items: center
+                text-decoration: none
+                color: $dark
+                border-radius: 5px
+                border: 1px solid transparent
+                transition: 0.3s
+                &:hover
+                    background: tint-color($secondary, 90)
+            .menu-sub
+                display: none
+                margin: 0
+                width: 100%
+                list-style-type: none
+                margin-top: 5px
+                .menu-item
+                    text-decoration: none
+                    color: $dark
+                    width: 100%
+                    height: 100%
+                    margin-top: 5px
+                    &.active
+                        a
+                            background: tint-color($info, 75)
+                            color: $info
+                            &:hover
+                                background: tint-color($info, 75)
+                                color: $info
+                    &.open
+                        .menu-sub
+                            display: block
+                    a
+                        padding: 10px
+                        width: 100%
+                        height: 100%
+                        margin: 0
+                        display: flex
+                        justify-content: space-between
+                        align-items: center
+                        text-decoration: none
+                        color: $dark
+                        border-radius: 5px
+                        background: $white
+                        border: 1px solid transparent
+                        transition: 0.3s
+                        &:hover
+                            background: tint-color($secondary, 90)
+                    .menu-sub
+                        display: none
+                        margin: 0
+                        width: 100%
+                        list-style-type: none
+                        margin-top: 5px
+                        .menu-item
+                            text-decoration: none
+                            color: $dark
+                            width: 100%
+                            height: 100%
+                            margin-top: 5px
+                            &.active
+                                a
+                                    background: tint-color($info, 75)
+                                    color: $info
+                                    &:hover
+                                        background: tint-color($info, 75)
+                                        color: $info
+                            a
+                                width: 100%
+                                height: 100%
+                                margin: 0
+                                padding: 10px
+                                display: flex
+                                justify-content: space-between
+                                align-items: center
+                                text-decoration: none
+                                color: $dark
+                                border-radius: 5px
+                                background: $white
+                                border: 1px solid transparent
+                                transition: 0.3s
+                                &:hover
+                                    background: tint-color($secondary, 90)

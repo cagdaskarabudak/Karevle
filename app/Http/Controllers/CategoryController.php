@@ -8,17 +8,8 @@ use App\Models\Category;
 class CategoryController extends Controller
 {
     public function view(string $slug){
-        $activeCategory = Category::where('slug', '=', $slug)->with('products')->first();
-        $categories = Category::all();
-        return view('category')->with([
-            'activeCategory' => $activeCategory,
-            'categories' => $categories
-        ]);
-    }
+        $category = Category::where('slug', '=', $slug)->first();
 
-    public function example(){
-        $category = Category::with('products')->first();
-
-        return $category->getAllProducts();
+        return view('category')->with('category', $category);
     }
 }
