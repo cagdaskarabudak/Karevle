@@ -15,4 +15,10 @@ class ProductController extends Controller
         $products = Product::all();
         return view('all-products')->with('products', $products);
     }
+
+    public function viewProduct($slug){
+        $product = Product::where('slug', '=', $slug)->first();
+
+        return view('product')->with('product', $product);
+    }
 }

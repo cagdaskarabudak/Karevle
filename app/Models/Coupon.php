@@ -14,6 +14,7 @@ class Coupon extends Model
         'name',
         'content',
         'code',
+        'coupon_amount',
         'expiration_time'
     ];
 

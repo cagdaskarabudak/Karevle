@@ -101,7 +101,9 @@
                 </div>
               <?php endif; ?>
                 <a href="<?php echo e(route('favorites')); ?>" class="menu-item menu-item-danger <?php if(Route::currentRouteName() == 'favorites'): ?> active active-danger <?php endif; ?>"><i class="fa-regular fa-heart"></i> <span>Favorilerim</span></a>
-                <a href="#" class="menu-item <?php if(Route::currentRouteName() == 'myShoppingCart'): ?> active <?php endif; ?>"><i class="fa-regular fa-cart-shopping"></i> <span>Sepetim</span></a>
+                <a href="<?php echo e(route('shopping-cart.view')); ?>" class="menu-item <?php if(Route::currentRouteName() == 'shopping-cart.view'): ?> active <?php endif; ?> position-relative"><i class="fa-regular fa-cart-shopping"></i> <span>Sepetim</span>
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary shopping-cart-count-badge"></span>
+              </a>
             </div>
         </div>
         <div class="navbar-bottom">
@@ -133,7 +135,8 @@
               <?php endif; ?>
                 <a href="<?php echo e(route('home')); ?>" class="menu-item <?php if(Route::currentRouteName() == 'home'): ?> active <?php endif; ?>"><i class="fa-regular fa-home"></i> <span>Ana Sayfa</span></a>
                 <a href="<?php echo e(route('favorites')); ?>" class="menu-item menu-item-danger user-item <?php if(Route::currentRouteName() == 'favorites'): ?> active active-danger <?php endif; ?>"><i class="fa-regular fa-heart"></i> <span>Favorilerim</span></a>
-                <a href="#" class="menu-item user-item <?php if(Route::currentRouteName() == 'myShoppingCart'): ?> active <?php endif; ?>"><i class="fa-regular fa-cart-shopping"></i> <span>Sepetim</span></a>
+                <a href="<?php echo e(route('shopping-cart.view')); ?>" class="menu-item user-item <?php if(Route::currentRouteName() == 'shopping-cart.view'): ?> active <?php endif; ?> position-relative"><i class="fa-regular fa-cart-shopping"></i> <span>Sepetim</span>
+                  <div class="position-absolute bottom-0 start-100 translate-middle badge rounded-pill bg-primary shopping-cart-count-badge"></div></a>
                 <?php $__currentLoopData = $lists; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $liste): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <a href="<?php echo e(route('list.view', $liste->slug)); ?>" class="menu-item menu-item-<?php echo e($liste->color); ?> list-item <?php if(request()->path() == "liste/{$liste->slug}"): ?> active active-<?php echo e($liste->color); ?> <?php endif; ?>"><i class="fa-regular <?php echo e($liste->icon); ?>"></i> <span><?php echo e($liste->name); ?></span></a>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

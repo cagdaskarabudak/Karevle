@@ -4,7 +4,7 @@
             <div class="card-body">
                 <a href="<?php echo e(route('user.profile')); ?>" class="nav-item <?php if(Route::currentRouteName() == 'user.profile'): ?> active <?php endif; ?>">Hesap Ayarlarım</a>
                 <a href="<?php echo e(route('user.orders')); ?>" class="nav-item <?php if(Route::currentRouteName() == 'user.orders'): ?> active <?php endif; ?>">Siparişlerim</a>
-                <a href="<?php echo e(route('user.addresses')); ?>" class="nav-item <?php if(Route::currentRouteName() == 'user.addresses'): ?> active <?php endif; ?>">Adreslerim</a>
+                <a href="<?php echo e(route('user.addresses')); ?>" class="nav-item <?php if(Route::currentRouteName() == 'user.addresses' || Route::currentRouteName() == 'user.addresses.edit' || Route::currentRouteName() == 'user.addresses.create'): ?> active <?php endif; ?>">Adreslerim</a>
                 <a href="<?php echo e(route('user.coupons')); ?>" class="nav-item <?php if(Route::currentRouteName() == 'user.coupons'): ?> active <?php endif; ?>">Kuponlarım</a>
             </div>
         </div>

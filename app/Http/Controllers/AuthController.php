@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use App\Models\Shoppingcart;
+use App\Models\ShoppingcartProduct;
 
 class AuthController extends Controller
 {
@@ -43,6 +46,16 @@ class AuthController extends Controller
             
             DB::commit();
 
+            $shopping_cart = Shoppingcart::where('session_id', '=', Session::getId())->first();
+            if($shopping_cart){
+                $user_shopping_cart = new Shoppingcart;
+                $user_shopping_cart->save();
+                foreach($shopping_cart->baskets as $basket){
+                    $basket->shopping_cart_id = $user_shopping_cart->id;
+                    $basket->save();
+                }
+                $shopping_cart->delete();
+            }
             Auth::login($user);
 
             return redirect()->back();
@@ -70,6 +83,36 @@ class AuthController extends Controller
         ->first();
 
         if ($user && Hash::check($password, $user->password)) {
+            $shopping_cart = Shoppingcart::where('session_id', '=', Session::getId())->first();
+            $user_shopping_cart = Shoppingcart::where('user_id', '=', $user->id)->first();
+            if($shopping_cart){
+                if($user_shopping_cart){
+                    foreach($shopping_cart->baskets as $basket){
+                        $status = 0;
+                        foreach($user_shopping_cart->baskets as $userbasket){
+                            if($basket->product_id == $userbasket->product_id){
+                                $userbasket->count += $basket->count;
+                                $basket->delete();
+                                $userbasket->save();
+                                $status = 1;
+                            }
+                        }
+                        if($status == 0){
+                            $basket->shopping_cart_id = $user_shopping_cart->id;
+                            $basket->save();
+                        }
+                    }
+                    $shopping_cart->delete();
+                }
+                else{
+                    $user_shopping_cart = new Shoppingcart;
+                    $user_shopping_cart->save();
+                    foreach($shopping_cart->baskets as $basket){
+                        $basket->shopping_cart_id = $user_shopping_cart->id;
+                        $basket->save();
+                    }
+                }
+            }
             Auth::login($user, $remember);
             return redirect()->back()
                 ->with('success', 'Login successful!');
@@ -83,6 +126,6 @@ class AuthController extends Controller
     public function logout(){
         Auth::logout();
 
-        return redirect()->back();
+        return redirect()->route('home');
     }
 }

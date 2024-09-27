@@ -22,7 +22,7 @@ class Session extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function sessionBaskets(){
-        return $this->hasMany(UserBasket::class, 'session_id', 'id');
+    public function shopping_cart(){
+        return $this->belongsTo(Shoppingcart::class, 'session_id', 'id');
     }
 }

@@ -2,6 +2,30 @@
     font-size: 10pt
 
 .products-card
+    &.shopping-cart-products-card    
+        .card-body
+            .product-card
+                @include responsive('xs')
+                    flex-basis: calc(100% / 1)
+                @include responsive('sm')
+                    flex-basis: calc(100% / 1.5)
+                @include responsive('md')
+                    flex-basis: calc(100% / 2.5)
+                @include responsive('lg')
+                    flex-basis: calc(100% / 2.5)
+                @include responsive('xl')
+                    flex-basis: calc(100% / 3.5)
+                @include responsive('xxl')
+                    flex-basis: calc(100% / 4.5)
+            .message
+                display: none
+            &.empty
+                .message
+                    display: flex
+                    flex-direction: column
+                    justify-content: center
+                    align-items: center
+                    row-gap: 10px
     .card-body
         display: flex
         flex-wrap: wrap
@@ -130,18 +154,7 @@
                         color: $light
                         background: rgb($secondary, 1)
             .product-images
-                @include responsive('xs')
-                    height: fit-content
-                @include responsive('sm')
-                    height: fit-content
-                @include responsive('md')
-                    height: fit-content
-                @include responsive('lg')
-                    height: fit-content
-                @include responsive('xl')
-                    height: fit-content
-                @include responsive('xxl')
-                    height: fit-content
+                height: 300px
                 width: 100%
                 .swiper
                     height: 100%
@@ -150,7 +163,11 @@
                             img
                                 width: 100%
                                 height: 100%
-                                object-fit: contain
+                                object-fit: cover
+                            video
+                                width: 100%
+                                height: 100%
+                                object-fit: cover
                     @include responsive('xs')
                         .swiper-pagination
                             display: none
@@ -198,11 +215,13 @@
                     font-size: 10pt
                     font-weight: 700
                     color: $success
+                .count
+                    font-size: 10pt
             .product-footer
                 display: flex
                 border-top: 1px solid $gray-200
                 height: 50px
-                button
+                a
                     display: flex
                     justify-content: center
                     align-items: center
@@ -213,6 +232,7 @@
                     background: $white
                     transition: 0.3s
                     height: 100%
+                    text-decoration: none
                     span
                         display: none
                     &:first-child
@@ -232,4 +252,62 @@
                         &:active
                             color: $white
                             background: $dark
+                    &.shopping-card-plus-btn
+                        color: $success
+                        &:active
+                            color: $white
+                            background: $success
+                    &.shopping-card-minus-btn
+                        color: $danger
+                        &:active
+                            color: $white
+                            background: $danger
+                        
+
+.shopping-cart-total-card
+    .card-body
+        .data
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: start
+            margin-bottom: 1%
+            .data-name
+                color: $secondary
+                font-size: 8pt
+                text-transform: uppercase
+            .data-count
+                color: $secondary
+                font-size: 6pt
+                text-transform: uppercase
+            .data-value
+                margin-left: 5%
+                font-size: 10pt
+    .card-footer
+        background: $white
+        .total-price
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: start
+            .text
+                color: $secondary
+                font-size: 8pt
+                text-transform: uppercase
+            .value
+                margin-left: 5%
+                color: $success
+                font-weight: 700
+        .shopping-cart-submit-btn
+            margin-top: 5%
+            width: 100%
+        .shopping-cart-clean
+            margin-top: 3%
+            display: block
+            color: $danger
+            width: 100%
+            text-align: center
+            text-decoration: none
+            font-size: 10pt
+
 

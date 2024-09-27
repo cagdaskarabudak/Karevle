@@ -4,7 +4,7 @@
             <div class="card-body">
                 <a href="{{ route('user.profile') }}" class="nav-item @if(Route::currentRouteName() == 'user.profile') active @endif">Hesap Ayarlarım</a>
                 <a href="{{ route('user.orders') }}" class="nav-item @if(Route::currentRouteName() == 'user.orders') active @endif">Siparişlerim</a>
-                <a href="{{ route('user.addresses') }}" class="nav-item @if(Route::currentRouteName() == 'user.addresses') active @endif">Adreslerim</a>
+                <a href="{{ route('user.addresses') }}" class="nav-item @if(Route::currentRouteName() == 'user.addresses' || Route::currentRouteName() == 'user.addresses.edit' || Route::currentRouteName() == 'user.addresses.create') active @endif">Adreslerim</a>
                 <a href="{{ route('user.coupons') }}" class="nav-item @if(Route::currentRouteName() == 'user.coupons') active @endif">Kuponlarım</a>
             </div>
         </div>

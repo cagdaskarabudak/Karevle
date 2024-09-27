@@ -57,7 +57,7 @@ async function searchBuild(results){
     });
     results.products.forEach(product => {
         let element = `
-            <a class="search-item product" href="#">${product.name}</a>
+            <a class="search-item product" href="/urun/${product.slug}">${product.name}</a>
         `;
         resultProducts.innerHTML += element;
     });

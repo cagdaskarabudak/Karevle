@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class Product extends Model
 {
@@ -29,21 +31,23 @@ class Product extends Model
     ];
 
     protected $with = [
-        'images',
+        'medias',
         'content',
         'comments',
         'category',
         'lists',
         'offers',
-        'favoritedUsers'
+        'favoritedUsers',
+        'taxes',
+        'stores'
     ];
 
     //*********************************************************//
     //RELATIONSHIPS --->
     //*********************************************************//
 
-    public function images(){
-        return $this->hasMany(ProductImage::class, 'product_id', 'id')->orderBy('sort');
+    public function medias(){
+        return $this->hasMany(ProductMedia::class, 'product_id', 'id')->orderBy('sort');
     }
 
     public function content(){
@@ -68,6 +72,15 @@ class Product extends Model
 
     public function favoritedUsers(){
         return $this->hasManyThrough(User::class, FavoritedProduct::class, 'product_id', 'id', 'id', 'user_id');
+    }
+
+    public function taxes(){
+        return $this->hasManyThrough(Tax::class, ProductTax::class, 'product_id', 'id', 'id', 'tax_id');
+    }
+
+    public function stores(){
+        return $this->hasManyThrough(Store::class, StoreProduct::class, 'product_id', 'id', 'id', 'store_id')
+                    ->select('stores.*', 'store_products.stock');
     }
 
     //*********************************************************//
@@ -127,6 +140,24 @@ class Product extends Model
 
     public function isFavoritedUser($userid){
         $query = FavoritedProduct::where('product_id', '=', $this->id)->where('user_id', '=', $userid)->first();
+
+        if($query){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function isInBasket(){
+        if(Auth::check()){
+            $query = Shoppingcart::where('user_id', Auth::user()->id)
+            ->first()?->baskets->where('product_id', $this->id)->first();
+        }
+        else{
+            $query = Shoppingcart::where('session_id', Session::getId())
+            ->first()?->baskets->where('product_id', $this->id)->first();
+        }
 
         if($query){
             return true;

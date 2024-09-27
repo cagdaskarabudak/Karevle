@@ -1,4 +1,4 @@
-<div class="product-card"
+<div class="product-card" aria-disabled="true"
         id="productCard<?php echo e($product->id); ?>"
         data-rate="<?php echo e($product->rate); ?>" 
         data-keys="<?php $__currentLoopData = $product->keys; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $prKey): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php echo e($prKey); ?> <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>" 
@@ -19,13 +19,18 @@
     <?php endif; ?>
     <div class="product-images">
         <div class="swiper">
-            <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
-            <?php $__currentLoopData = $product->images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <div class="swiper-slide">
-                <img src="/storage/product_images/<?php echo e($image->name); ?>" alt="">
-            </div>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php $__currentLoopData = $product->medias; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $media): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <div class="swiper-slide">
+                    <?php if($media->type == 'video'): ?>
+                        <video muted loop>
+                            <source src="/storage/product_medias/<?php echo e($media->name); ?>" type="video/mp4">
+                        </video>
+                    <?php elseif($media->type == 'image'): ?>
+                        <img src="/storage/product_medias/<?php echo e($media->name); ?>" alt="">
+                    <?php endif; ?>
+                </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
             <div class="swiper-scrollbar"></div>
             <div class="swiper-pagination"></div>
@@ -38,11 +43,11 @@
             <div class="rating-stars"></div>
             <span class="total-comments">(<?php echo e(count($product->comments)); ?>)</span>
         </div>
-        <div class="price"><?php echo e($product->price); ?> TL</div>
+        <div class="price"><?php echo e(number_format($product->price, 2, ',', '.')); ?> TL</div>
     </div>
     <div class="product-footer">
-        <button class="shopping-card-btn"><i class="fa-solid fa-cart-shopping"></i><span>Sepete Ekle</span></button>
-        <button class="detail-btn"><i class="fa-solid fa-eye"></i><span>İncele</span></button>
+        <a href="Javascript:void(0);" type="button" class="shopping-card-btn" data-id="<?php echo e($product->id); ?>"><i class="fa-solid <?php if($product->isInBasket(Session::getId())): ?> fa-cart-circle-check <?php else: ?> fa-cart-shopping <?php endif; ?>"></i><span>Sepete Ekle</span></a>
+        <a href="<?php echo e(route('product.show', $product->slug)); ?>" type="button" class="detail-btn"><i class="fa-solid fa-eye"></i><span>İncele</span></a>
     </div>
 </div>
 
@@ -64,6 +69,7 @@
 
     let product<?php echo e($product->id); ?>Swiper = new Swiper('.product-card#productCard<?php echo e($product->id); ?> .product-images .swiper', {
         slidesPerView: 1,
+        effect: "fade",
         scrollbar: {
             enabled: true,
             el: '.product-card#productCard<?php echo e($product->id); ?> .product-images .swiper .swiper-scrollbar',
@@ -72,7 +78,7 @@
             el: '.product-card#productCard<?php echo e($product->id); ?> .product-images .swiper .swiper-pagination',
         },
         loop: swiperloop,
-        speed: 500
+        speed: 0
     });
 
     let startX = 0; // Başlangıç x koordinatı
@@ -103,4 +109,43 @@
     document.querySelector('.product-card#productCard<?php echo e($product->id); ?> .product-images .swiper').addEventListener('mouseenter', function() {
         product<?php echo e($product->id); ?>Swiper.slideTo(0);
     });
+
+    document.addEventListener('DOMContentLoaded', function(){
+        document.querySelectorAll('.placeholder').forEach(placeHolder => {
+            placeHolder.classList.remove('placeholder');
+        });
+    });
+
+    const slideVideos = document.querySelectorAll('.swiper-slide video');
+
+    if(slideVideos){
+        slideVideos.forEach(slideVideo => {
+            // Mouse üzerine geldiğinde video baştan başlasın ve oynasın
+            slideVideo.addEventListener('mouseover', () => {
+                slideVideo.currentTime = 0;  // Video baştan başlasın
+                slideVideo.play();  // Video oynat
+            });
+            slideVideo.addEventListener('touchstart', () => {
+                slideVideo.currentTime = 0;  // Video baştan başlasın
+                slideVideo.play();  // Video oynat
+            });
+
+            // Mouse videonun üzerinden ayrıldığında video başa dönsün ve durdurulsun
+            slideVideo.addEventListener('mouseout', () => {
+                slideVideo.pause();  // Video durdur
+                slideVideo.currentTime = 0;  // Video başa sar
+            });
+            slideVideo.addEventListener('touchend', () => {
+                slideVideo.pause();  // Video durdur
+                slideVideo.currentTime = 0;  // Video başa sar
+            });
+            slideVideo.addEventListener('touchcancel', () => {
+                slideVideo.pause();  // Video durdur
+                slideVideo.currentTime = 0;  // Video başa sar
+            });
+        });
+    }
+
+
+
 </script><?php /**PATH /Users/cagdaskarabudak/Desktop/Projects/E-Commerce/KarevleLaravel/resources/views/components/product-card.blade.php ENDPATH**/ ?>

@@ -38,7 +38,7 @@ if(sortSelect){
                 return dateB - dateA;
             });
     
-            const container = document.querySelector('.products-card');
+            const container = document.querySelector('.products-card .card-body');
             items.forEach(item => container.appendChild(item));
         }
         else if(this.value == 'lowestPrice'){
@@ -50,7 +50,7 @@ if(sortSelect){
                 return dateA - dateB;
             });
     
-            const container = document.querySelector('.products-card');
+            const container = document.querySelector('.products-card .card-body');
             items.forEach(item => container.appendChild(item));
         }
         else if(this.value == 'latest'){
@@ -62,7 +62,7 @@ if(sortSelect){
                 return dateB - dateA;
             });
     
-            const container = document.querySelector('.products-card');
+            const container = document.querySelector('.products-card .card-body');
             items.forEach(item => container.appendChild(item));
         }
         else if(this.value == 'oldest'){
@@ -74,7 +74,7 @@ if(sortSelect){
                 return dateA - dateB;
             });
     
-            const container = document.querySelector('.products-card');
+            const container = document.querySelector('.products-card .card-body');
             items.forEach(item => container.appendChild(item));
         }
     });

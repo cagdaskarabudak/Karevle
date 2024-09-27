@@ -22,7 +22,7 @@ class Category extends Model
     }
 
     public function products(){
-        return $this->hasMany(Product::class, 'category_id', 'id')->with('images');
+        return $this->hasMany(Product::class, 'category_id', 'id')->with('medias');
     }
 
     public function getAllProducts(){

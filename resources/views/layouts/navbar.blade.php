@@ -63,7 +63,9 @@
                 </div>
               @endif
                 <a href="{{ route('favorites') }}" class="menu-item menu-item-danger @if(Route::currentRouteName() == 'favorites') active active-danger @endif"><i class="fa-regular fa-heart"></i> <span>Favorilerim</span></a>
-                <a href="#" class="menu-item @if(Route::currentRouteName() == 'myShoppingCart') active @endif"><i class="fa-regular fa-cart-shopping"></i> <span>Sepetim</span></a>
+                <a href="{{ route('shopping-cart.view') }}" class="menu-item @if(Route::currentRouteName() == 'shopping-cart.view') active @endif position-relative"><i class="fa-regular fa-cart-shopping"></i> <span>Sepetim</span>
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary shopping-cart-count-badge"></span>
+              </a>
             </div>
         </div>
         <div class="navbar-bottom">
@@ -95,7 +97,8 @@
               @endif
                 <a href="{{ route('home') }}" class="menu-item @if(Route::currentRouteName() == 'home') active @endif"><i class="fa-regular fa-home"></i> <span>Ana Sayfa</span></a>
                 <a href="{{ route('favorites') }}" class="menu-item menu-item-danger user-item @if(Route::currentRouteName() == 'favorites') active active-danger @endif"><i class="fa-regular fa-heart"></i> <span>Favorilerim</span></a>
-                <a href="#" class="menu-item user-item @if(Route::currentRouteName() == 'myShoppingCart') active @endif"><i class="fa-regular fa-cart-shopping"></i> <span>Sepetim</span></a>
+                <a href="{{ route('shopping-cart.view') }}" class="menu-item user-item @if(Route::currentRouteName() == 'shopping-cart.view') active @endif position-relative"><i class="fa-regular fa-cart-shopping"></i> <span>Sepetim</span>
+                  <div class="position-absolute bottom-0 start-100 translate-middle badge rounded-pill bg-primary shopping-cart-count-badge"></div></a>
                 @foreach($lists as $liste)
                     <a href="{{ route('list.view', $liste->slug) }}" class="menu-item menu-item-{{ $liste->color }} list-item @if(request()->path() == "liste/{$liste->slug}") active active-{{ $liste->color }} @endif"><i class="fa-regular {{ $liste->icon }}"></i> <span>{{ $liste->name }}</span></a>
                 @endforeach

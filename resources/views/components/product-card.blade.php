@@ -1,4 +1,4 @@
-<div class="product-card"
+<div class="product-card" aria-disabled="true"
         id="productCard{{ $product->id }}"
         data-rate="{{ $product->rate }}" 
         data-keys="@foreach($product->keys as $prKey){{ $prKey }} @endforeach" 
@@ -18,13 +18,18 @@
     @endif
     <div class="product-images">
         <div class="swiper">
-            <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
-            @foreach($product->images as $image)
-            <div class="swiper-slide">
-                <img src="/storage/product_images/{{ $image->name }}" alt="">
-            </div>
-            @endforeach
+                @foreach($product->medias as $media)
+                <div class="swiper-slide">
+                    @if($media->type == 'video')
+                        <video muted loop>
+                            <source src="/storage/product_medias/{{ $media->name }}" type="video/mp4">
+                        </video>
+                    @elseif($media->type == 'image')
+                        <img src="/storage/product_medias/{{ $media->name }}" alt="">
+                    @endif
+                </div>
+                @endforeach
             </div>
             <div class="swiper-scrollbar"></div>
             <div class="swiper-pagination"></div>
@@ -37,11 +42,11 @@
             <div class="rating-stars"></div>
             <span class="total-comments">({{ count($product->comments) }})</span>
         </div>
-        <div class="price">{{ $product->price }} TL</div>
+        <div class="price">{{ number_format($product->price, 2, ',', '.') }} TL</div>
     </div>
     <div class="product-footer">
-        <button class="shopping-card-btn"><i class="fa-solid fa-cart-shopping"></i><span>Sepete Ekle</span></button>
-        <button class="detail-btn"><i class="fa-solid fa-eye"></i><span>İncele</span></button>
+        <a href="Javascript:void(0);" type="button" class="shopping-card-btn" data-id="{{ $product->id }}"><i class="fa-solid @if($product->isInBasket(Session::getId())) fa-cart-circle-check @else fa-cart-shopping @endif"></i><span>Sepete Ekle</span></a>
+        <a href="{{ route('product.show', $product->slug) }}" type="button" class="detail-btn"><i class="fa-solid fa-eye"></i><span>İncele</span></a>
     </div>
 </div>
 
@@ -63,6 +68,7 @@
 
     let product{{$product->id}}Swiper = new Swiper('.product-card#productCard{{$product->id}} .product-images .swiper', {
         slidesPerView: 1,
+        effect: "fade",
         scrollbar: {
             enabled: true,
             el: '.product-card#productCard{{$product->id}} .product-images .swiper .swiper-scrollbar',
@@ -71,7 +77,7 @@
             el: '.product-card#productCard{{$product->id}} .product-images .swiper .swiper-pagination',
         },
         loop: swiperloop,
-        speed: 500
+        speed: 0
     });
 
     let startX = 0; // Başlangıç x koordinatı
@@ -102,4 +108,43 @@
     document.querySelector('.product-card#productCard{{$product->id}} .product-images .swiper').addEventListener('mouseenter', function() {
         product{{$product->id}}Swiper.slideTo(0);
     });
+
+    document.addEventListener('DOMContentLoaded', function(){
+        document.querySelectorAll('.placeholder').forEach(placeHolder => {
+            placeHolder.classList.remove('placeholder');
+        });
+    });
+
+    const slideVideos = document.querySelectorAll('.swiper-slide video');
+
+    if(slideVideos){
+        slideVideos.forEach(slideVideo => {
+            // Mouse üzerine geldiğinde video baştan başlasın ve oynasın
+            slideVideo.addEventListener('mouseover', () => {
+                slideVideo.currentTime = 0;  // Video baştan başlasın
+                slideVideo.play();  // Video oynat
+            });
+            slideVideo.addEventListener('touchstart', () => {
+                slideVideo.currentTime = 0;  // Video baştan başlasın
+                slideVideo.play();  // Video oynat
+            });
+
+            // Mouse videonun üzerinden ayrıldığında video başa dönsün ve durdurulsun
+            slideVideo.addEventListener('mouseout', () => {
+                slideVideo.pause();  // Video durdur
+                slideVideo.currentTime = 0;  // Video başa sar
+            });
+            slideVideo.addEventListener('touchend', () => {
+                slideVideo.pause();  // Video durdur
+                slideVideo.currentTime = 0;  // Video başa sar
+            });
+            slideVideo.addEventListener('touchcancel', () => {
+                slideVideo.pause();  // Video durdur
+                slideVideo.currentTime = 0;  // Video başa sar
+            });
+        });
+    }
+
+
+
 </script>

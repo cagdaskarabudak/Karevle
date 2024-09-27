@@ -43,7 +43,7 @@
         </div>
     </div>
     <div class="col-lg-9 col-md-12 col-sm-12">
-        <div class="card products-card products-card-danger">
+        <div class="card products-card">
             <div class="card-body">
                 <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <?php if (isset($component)) { $__componentOriginalecfc721726b8b5798826c96d529d8b59 = $component; } ?>

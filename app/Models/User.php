@@ -48,8 +48,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function userBaskets(){
-        return $this->hasMany(UserBasket::class, 'user_id', 'id');
+    public function shopping_cart(){
+        return $this->belongsTo(Shoppingcart::class, 'user_id', 'id');
     }
 
     public function favorites(){
@@ -60,15 +60,7 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class,'role_id', 'id');
     }
 
-    public function coupons(){
-        return $this->hasManyThrough(Coupon::class, CouponUser::class, 'user_id', 'id', 'id', 'coupon_id');
-    }
-
-    public function used_coupons(){
-        return $this->hasManyThrough(Coupon::class, CouponUser::class, 'user_id', 'id', 'id', 'coupon_id')->where('is_used', '=', 1);
-    }
-
-    public function not_used_coupons(){
-        return $this->hasManyThrough(Coupon::class, CouponUser::class, 'user_id', 'id', 'id', 'coupon_id')->where('is_used', '=', 0);
+    public function addresses(){
+        return $this->hasMany(Address::class, 'user_id', 'id');
     }
 }

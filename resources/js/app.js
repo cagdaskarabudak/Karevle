@@ -19,7 +19,13 @@ document.addEventListener('DOMContentLoaded', function(){
     $(loadingScreen).hide();
 });
 
+document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+});
+
 import './filter-card';
 import './product_card';
 import './search';
 import './search-md';
+import './addresses';
+import './shopping_cart';

@@ -43,7 +43,7 @@
         </div>
     </div>
     <div class="col-lg-9 col-md-12 col-sm-12">
-        <div class="card products-card products-card-danger">
+        <div class="card products-card">
             <div class="card-body">
                 @foreach($products as $product)
                     <x-product-card :product='$product' />
