@@ -11,7 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->validateCsrfTokens(except: [
+            '/sepetim/odeme/3Donay'
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

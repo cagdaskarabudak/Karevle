@@ -13,15 +13,23 @@ class Address extends Model
     protected $fillable = [
         'title',
         'user_id',
+        'type',
         'first_name',
         'last_name',
+        'company_name',
+        'tax_office',
+        'tax_number',
+        'mersis_number',
+        'ID_number',
+        'email',
         'phone',
         'country',
         'city',
         'district',
         'address',
         'postal_code',
-        'is_default'
+        'is_default',
+        'is_invoice_default'
     ];
 
     public function user(){

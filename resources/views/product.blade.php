@@ -74,6 +74,23 @@
             <div class="product-comment">
                 <div class="comment-header">{{ $comment->user->first_name.' '.$comment->user->last_name }}</div>
                 <div class="comment-body">{{ $comment->comment }}</div>
+                @if(count($comment->medias) > 0)
+                <div class="comment-medias">
+                    @foreach($comment->medias as $media)
+                    <div class="comment-media">
+                        <button class="btn btn-dark text-light close-btn"><i class="fa-solid fa-x"></i></button>
+                        @if($media->type == 'image')
+                        <img class="" src="/storage/comment_medias/{{ $media->name }}">
+                        @elseif($media->type == 'video')
+                        <div class="icon"><i class="fa-solid fa-play"></i></div>
+                        <video loop muted>
+                            <source src="/storage/comment_medias/{{ $media->name }}" type="video/mp4">
+                        </video>
+                        @endif
+                    </div>
+                    @endforeach
+                </div>
+                @endif
                 <div class="comment-footer"> <div class="comment-rating"><div class="comment-rating-amount" data-rate="{{ $comment->rate }}">{{ $comment->rate }}</div><div class="comment-rating-stars"></div></div><div class="created-date">{{ $comment->created_at }}</div></div>
             </div>
             @endforeach
@@ -127,6 +144,47 @@
                 slideVideo.addEventListener('touchcancel', (e) => {
                     slideVideo.pause();  // Video durdur
                     slideVideo.currentTime = 0;  // Video başa sar
+                });
+            });
+        }
+
+        const commentMedias = document.querySelectorAll('.comment-media');
+        if(commentMedias){
+            commentMedias.forEach(commentMedia => {
+                commentMedia.addEventListener('click', function(e){
+                    if(commentMedia.classList.contains('show')){
+                        if(e.target != commentMedia.querySelector('img') && e.target != commentMedia.querySelector('video')){
+                            commentMedia.classList.remove('show');
+                            let video = commentMedia.querySelector('video');
+                            if(video && !video.paused){
+                                video.currentTime = 0;
+                                video.pause();
+                                $(commentMedia.querySelector('.icon')).show();
+                            }
+                        }
+                        if(e.target == commentMedia.querySelector('video')){
+                            let video = commentMedia.querySelector('video');
+                            if(video){
+                                if(video.paused){
+                                    video.play();
+                                    $(commentMedia.querySelector('.icon')).hide();
+                                }
+                                else{
+                                    video.pause();
+                                    $(commentMedia.querySelector('.icon')).show();
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        commentMedia.classList.add('show');
+                        let video = commentMedia.querySelector('video');
+                            if(video){
+                                video.currentTime = 0;
+                                video.play();
+                                $(commentMedia.querySelector('.icon')).hide();
+                            }
+                    }
                 });
             });
         }

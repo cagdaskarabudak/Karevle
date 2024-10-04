@@ -8,19 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Offer extends Model
 {
     use HasFactory;
-    public $timestamps = true;
     protected $table = 'offers';
+    public $timestamps = true;
     protected $fillable = [
         'name',
         'content',
         'amount',
-        'amount_type',
-        'expiration_time'
+        'type',
+        'media_name'
     ];
 
     public function products(){
-        return $this->hasManyThrough(Product::class, OfferProduct::class, 'offer_id', 'id', 'id', 'product_id');
+        return $this->hasManyThrough(Product::class, ProductOffer::class, 'offer_id', 'id', 'id', 'product_id');
     }
-
-    
 }

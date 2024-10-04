@@ -9,10 +9,8 @@ class Tax extends Model
 {
     use HasFactory;
     protected $table = 'taxes';
-    public $timestamps = true;
+    public $timestamps = false;
     protected $fillable = [
-        'name',
         'amount',
-        'type'
     ];
 }

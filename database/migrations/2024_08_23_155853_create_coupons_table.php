@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('content');
             $table->string('code');
             $table->decimal('coupon_amount', 11, 2);
+            $table->integer('user_use_limit')->default(1);
             $table->timestampTz('expiration_time')->nullable();
             $table->timestamps();
         });

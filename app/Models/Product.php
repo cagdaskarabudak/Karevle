@@ -20,14 +20,16 @@ class Product extends Model
     protected $fillable = [
         'name',
         'slug',
-        'price',
+        'sale_price',
         'category_id',
     ];
     protected $appends = [
-        'price_with_offers',
         'keys',
         'rate',
-        'created_date'
+        'created_date',
+        'price',
+        'calc_vat',
+        'calc_vatless_price'
     ];
 
     protected $with = [
@@ -36,10 +38,10 @@ class Product extends Model
         'comments',
         'category',
         'lists',
-        'offers',
         'favoritedUsers',
-        'taxes',
-        'stores'
+        'vat',
+        'stores',
+        'offer'
     ];
 
     //*********************************************************//
@@ -66,16 +68,12 @@ class Product extends Model
         return $this->hasManyThrough(Liste::class, ProductList::class, 'product_id', 'id', 'id', 'list_id')->orderBy('sort');
     }
 
-    public function offers(){
-        return $this->hasManyThrough(Offer::class, OfferProduct::class, 'product_id', 'id', 'id', 'offer_id');
-    }
-
     public function favoritedUsers(){
         return $this->hasManyThrough(User::class, FavoritedProduct::class, 'product_id', 'id', 'id', 'user_id');
     }
 
-    public function taxes(){
-        return $this->hasManyThrough(Tax::class, ProductTax::class, 'product_id', 'id', 'id', 'tax_id');
+    public function vat(){
+        return $this->hasOneThrough(Tax::class, ProductTax::class, 'product_id', 'id', 'id', 'tax_id');
     }
 
     public function stores(){
@@ -83,25 +81,13 @@ class Product extends Model
                     ->select('stores.*', 'store_products.stock');
     }
 
+    public function offer(){
+        return $this->hasOneThrough(Offer::class, ProductOffer::class, 'product_id', 'id', 'id', 'offer_id');
+    }
+
     //*********************************************************//
     //ATTRIBUTE METHODS --->
     //*********************************************************//
-
-    public function getPriceWithOffersAttribute(){
-        if(count($this->offers) > 0){
-            $new_price = $this->price;
-            foreach($this->get_offers('rate') as $offer){
-                $new_price = $new_price - ($new_price * $offer->amount) / 100;
-            }
-            foreach($this->get_offers('price') as $offer){
-                $new_price = $new_price - $offer->amount;
-            }
-            return $this->new_price = number_format($new_price, 2);
-        }
-        else{
-            return 0;
-        }
-    }
 
     public function getRateAttribute(){
         $totalrate = 0;
@@ -128,15 +114,38 @@ class Product extends Model
         return strtotime($this->created_at);
     }
 
+    public function getPriceAttribute(){
+        if($this->offer){
+            if($this->offer->type == 'currency'){
+                $totalDiscount = $this->sale_price - $this->offer->amount;
+            }
+            elseif($this->offer->type == 'percentage'){
+                $totalDiscount = $this->sale_price * $this->offer->amount / 100;
+            }
+        }
+        else{
+            $totalDiscount = 0;
+        }
+
+        $price = $this->sale_price - $totalDiscount;
+
+        return $price;
+    }
+
+    public function getCalcVatAttribute(){
+
+        return $this->sale_price - $this->calc_vatless_price;
+    }
+
+    public function getCalcVatlessPriceAttribute(){
+        $vat_amount = $this->vat->amount;
+
+        return $this->sale_price / ( 1 + ($vat_amount / 100));
+    }
+
     //*********************************************************//
     //METHODS --->
     //*********************************************************//
-
-    public function get_offers($type = null){
-        if ($type === 'rate' || $type === 'price') {
-            return $this->offers->where('amount_type', '=', $type);
-        }
-    }
 
     public function isFavoritedUser($userid){
         $query = FavoritedProduct::where('product_id', '=', $this->id)->where('user_id', '=', $userid)->first();

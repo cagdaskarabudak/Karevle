@@ -29,7 +29,7 @@ export default defineConfig({
         host: '0.0.0.0',
         port: 3000, // Veya istediğin bir port
         hmr: {
-          host: '192.168.1.86', // Yerel ağ IP adresin
+          host: 'localhost', // Yerel ağ IP adresin
           port: 3000, // Aynı port numarasını kullan
         },
     },

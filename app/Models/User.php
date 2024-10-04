@@ -49,7 +49,7 @@ class User extends Authenticatable
     }
 
     public function shopping_cart(){
-        return $this->belongsTo(Shoppingcart::class, 'user_id', 'id');
+        return $this->hasOne(Shoppingcart::class, 'user_id', 'id');
     }
 
     public function favorites(){
@@ -62,5 +62,13 @@ class User extends Authenticatable
 
     public function addresses(){
         return $this->hasMany(Address::class, 'user_id', 'id');
+    }
+
+    public function coupons(){
+        return $this->hasMany(CouponUser::class, 'user_id', 'id');
+    }
+
+    public function orders(){
+        return $this->hasMany(Order::class, 'user_id', 'id');
     }
 }

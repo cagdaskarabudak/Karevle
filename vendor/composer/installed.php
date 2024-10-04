@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '23117211bca9d759208e6715306ad124df7397ba',
+        'reference' => '3f734bdd35d1d25e1dfa4fe60fdb2690d9bfe478',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -364,6 +364,15 @@
                 0 => 'v11.19.0',
             ),
         ),
+        'iyzico/iyzipay-php' => array(
+            'pretty_version' => 'v2.0.56',
+            'version' => '2.0.56.0',
+            'reference' => '5e4e8116429353e80da8852b31fb46ef42db47e7',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../iyzico/iyzipay-php',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'kodova/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -382,7 +391,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '23117211bca9d759208e6715306ad124df7397ba',
+            'reference' => '3f734bdd35d1d25e1dfa4fe60fdb2690d9bfe478',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

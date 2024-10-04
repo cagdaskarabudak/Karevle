@@ -19,9 +19,9 @@ document.addEventListener('DOMContentLoaded', function(){
     $(loadingScreen).hide();
 });
 
-document.addEventListener('contextmenu', (e) => {
+/*document.addEventListener('contextmenu', (e) => {
     e.preventDefault();
-});
+});*/
 
 import './filter-card';
 import './product_card';

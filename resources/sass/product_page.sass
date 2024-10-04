@@ -186,7 +186,6 @@
         display: flex
         flex-direction: column
         justify-content: space-between
-        z-index: -1
         .comment-header
             color: $secondary
             font-size: 10pt
@@ -198,6 +197,78 @@
             font-size: 10pt
             padding: 5px
             padding: 10px
+        .comment-medias
+            position: relative
+            display: flex
+            justify-content: center
+            align-items: center
+            flex-wrap: wrap
+            width: 100%
+            padding: 3%
+            row-gap: 10px
+            .comment-media
+                position: relative
+                flex-basis: calc(100% / 5)
+                height: 50px
+                width: 50px
+                cursor: pointer
+                margin-right: 5px
+                display: flex
+                justify-content: center
+                align-items: center
+                .close-btn
+                    display: none
+                &.show
+                    position: fixed
+                    width: 100%
+                    height: 100%
+                    left: 0
+                    top: 0
+                    display: flex
+                    align-items: center
+                    justify-content: center
+                    background: rgba(0, 0, 0, 0.5)
+                    z-index: 9999
+                    .close-btn
+                        display: flex
+                        justify-content: center
+                        align-items: center
+                        position: absolute
+                        top: 5px
+                        right: 5px
+                    img
+                        width: auto
+                        height: 90%
+                        object-fit: contain
+                        border-radius: 0
+                    video
+                        width: 50%
+                        height: auto
+                        object-fit: contain
+                        border-radius: 0
+                    .icon
+                        font-size: 24pt
+
+                img
+                    border-radius: 5px
+                    width: 100%
+                    height: 100%
+                    object-fit: cover
+                video
+                    border-radius: 5px
+                    width: 100%
+                    height: 100%
+                    object-fit: cover
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                .icon
+                    position: absolute
+                    color: $dark
+                    font-size: 16pt
+                &:hover
+                    .icon
+                        filter: drop-shadow(0 0 3px $white)
         .comment-footer
             display: flex
             align-items: center

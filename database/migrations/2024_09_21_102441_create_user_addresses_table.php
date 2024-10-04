@@ -14,9 +14,16 @@ return new class extends Migration
         Schema::create('user_addresses', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->enum('type', ['personal', 'personal_company', 'company'])->default('personal');
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('ID_number')->nullable();
+            $table->string('company_name')->nullable();
+            $table->string('tax_office')->nullable();
+            $table->string('tax_number')->nullable();
+            $table->string('mersis_number')->nullable();
+            $table->string('email');
             $table->string('phone');
             $table->string('country');
             $table->string('city');
@@ -25,6 +32,7 @@ return new class extends Migration
             $table->string('postal_code');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('is_default');
+            $table->integer('is_invoice_default');
             $table->timestamps();
         });
     }

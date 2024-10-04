@@ -18,7 +18,14 @@
 <?php $attributes = $attributes->except(\App\View\Components\Account::ignoredParameterNames()); ?>
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
-        Siparişlerim
+        <ul>
+            <?php $__currentLoopData = Auth::user()->orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <div class="order">
+                <b>ID:</b> <?php echo e($order->id); ?> &emsp; <b>Price:</b> <?php echo e($order->total_price); ?> &emsp; <b>Status:</b> <?php echo e($order->status->content); ?>
+
+            </div>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        </ul>
      <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginald37ab9159f33ee4ab08f15873d4c9677)): ?>

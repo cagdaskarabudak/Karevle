@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\AuthMiddleware;
+use App\Http\Middleware\ShoppingcartMiddleware;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ListController;
 use App\Http\Controllers\CategoryController;
@@ -13,6 +14,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CouponController;
+use App\Http\Controllers\IyzicoController;
 
 Route::get('/', [MainController::class, 'home'])->name('home');
 
@@ -26,7 +29,19 @@ Route::get('/tum-urunler', [ProductController::class, 'viewAll'])->name('allProd
 
 Route::post('/mainSearch', [SearchController::class, 'mainSearch'])->name('mainSearch');
 Route::get('/arama', [SearchController::class, 'search'])->name('search');
-Route::get('/sepetim', [ShoppingCartController::class, 'view'])->name('shopping-cart.view');
+
+Route::post('/add-shoppingcart-delivery-address', [ShoppingCartController::class, 'addShoppingCartDeliveryAddress'])->name('add-shoppingcart-delivery-address');
+Route::post('/add-shoppingcart-invoice-address', [ShoppingCartController::class, 'addShoppingCartInvoiceAddress'])->name('add-shoppingcart-invoice-address');
+Route::get('/example-payment', [IyzicoController::class, 'createPayment']);
+
+Route::middleware([ShoppingcartMiddleware::class])->group(function () {
+    Route::get('/sepetim', [ShoppingCartController::class, 'view'])->name('shopping-cart.view');
+    Route::get('/sepetim/onayla', [ShoppingCartController::class, 'confirmView'])->name('shopping-cart.confirm.view');
+    Route::get('/sepetim/odeme', [ShoppingCartController::class, 'paymentView'])->name('shopping-cart.payment.view');
+    Route::post('/sepetim/odeme', [ShoppingCartController::class, 'paymentTransaction'])->name('shopping-cart.payment.transaction');
+    Route::post('/sepetim/odeme/3Donay', [IyzicoController::class, 'complete3DSecurePayment']);
+    Route::get('/shopping-cart/destroy', [ShoppingCartController::class, 'destroy'])->name('shopping-cart.destroy');
+});
 
 Route::post('/addShoppingCart', [ShoppingCartController::class, 'add'])->name('shopping-cart.add');
 Route::post('/removeShoppingCart', [ShoppingCartController::class, 'remove'])->name('shopping-cart.remove');
@@ -34,8 +49,11 @@ Route::post('/cleanShoppingCart', [ShoppingCartController::class, 'clean'])->nam
 Route::post('/countShoppingCart', [ShoppingCartController::class, 'getCount'])->name('shopping-cart.count');
 Route::post('/checkCoupon', [ShoppingCartController::class, 'checkCoupon'])->name('shopping-cart.checkCoupon');
 Route::post('/details-shopping-cart', [ShoppingCartController::class, 'getDetails'])->name('shopping-cart.details');
+Route::post('/coupon-cancel', [ShoppingCartController::class, 'cancelCoupon'])->name('shopping-cart.cancelCoupon');
 
 Route::get('/example', [MainController::class, 'example']);
+
+Route::post('/coupon-query', [CouponController::class, 'control'])->name('coupon.control');
 
 Route::middleware(['guest'])->group(function (){
     Route::get('giris-yap', [AuthController::class, 'loginView'])->name('login.view');
@@ -56,7 +74,8 @@ Route::middleware([AuthMiddleware::class])->group(function () {
     Route::get('/profilim/adreslerim/{id}', [UserController::class, 'editAddressView'])->name('user.addresses.edit');
     Route::post('/profilim/adreslerim/duzenle', [UserController::class, 'editAddress'])->name('user.addresses.edit.post');
     Route::post('/defaultAddress', [UserController::class, 'defaultAddress'])->name('user.address.default');
-    Route::get('/profilim/kuponlarım', [UserController::class, 'myCouponsView'])->name('user.coupons');
+    Route::post('/defaultInvoiceAddress', [UserController::class, 'defaultInvoiceAddress'])->name('user.address.invoiceDefault');
+    Route::get('/profilim/kuponlarim', [UserController::class, 'myCouponsView'])->name('user.coupons');
 
     Route::get('/favorilerim', [FavoriteController::class, 'viewFavorites'])->name('favorites');
     Route::post('/addFavorites', [FavoriteController::class, 'addFavorites'])->name('addFavorites');

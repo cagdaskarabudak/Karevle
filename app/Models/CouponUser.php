@@ -15,12 +15,28 @@ class CouponUser extends Model
         'coupon_id',
         'is_used'
     ];
+    protected $with = [
+        'coupon',
+        'user'
+    ];
+    protected $appends = [
+        'user_is_used'
+    ];
 
     public function user(){
-        return $this->belongsTo(User::class, 'id', 'user_id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function coupon(){
-        return $this->belongsTo(Coupon::class, 'id', 'coupon_id');
+        return $this->belongsTo(Coupon::class, 'coupon_id', 'id');
+    }
+
+    public function getUserIsUsedAttribute(){
+        if($this->is_used == $this->coupon->user_use_limit){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

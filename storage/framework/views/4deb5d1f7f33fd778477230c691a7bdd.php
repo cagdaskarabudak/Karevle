@@ -43,7 +43,14 @@
             <div class="rating-stars"></div>
             <span class="total-comments">(<?php echo e(count($product->comments)); ?>)</span>
         </div>
-        <div class="price"><?php echo e(number_format($product->price, 2, ',', '.')); ?> TL</div>
+        <div class="price">
+            <?php if($product->sale_price != $product->price): ?>
+            <div class="sale-price">
+                <?php echo e(number_format($product->sale_price, 2, ',', '.')); ?> TL
+            </div>
+            <?php endif; ?>
+            <?php echo e(number_format($product->price, 2, ',', '.')); ?> TL
+        </div>
     </div>
     <div class="product-footer">
         <a href="Javascript:void(0);" type="button" class="shopping-card-btn" data-id="<?php echo e($product->id); ?>"><i class="fa-solid <?php if($product->isInBasket(Session::getId())): ?> fa-cart-circle-check <?php else: ?> fa-cart-shopping <?php endif; ?>"></i><span>Sepete Ekle</span></a>

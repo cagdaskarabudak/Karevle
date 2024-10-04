@@ -42,7 +42,14 @@
             <div class="rating-stars"></div>
             <span class="total-comments">({{ count($basket->product->comments) }})</span>
         </div>
-        <div class="price">{{ number_format($basket->product->price, 2, ',', '.') }} TL</div>
+        <div class="price">
+            @if($basket->product->sale_price != $basket->product->price)
+            <div class="sale-price">
+                {{ number_format($basket->product->sale_price, 2, ',', '.') }} TL
+            </div>
+            @endif
+            {{ number_format($basket->product->price, 2, ',', '.') }} TL
+        </div>
         <div class="count"><span>{{ $basket->count }}</span> Adet</div>
     </div>
     <div class="product-footer">

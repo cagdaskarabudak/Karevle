@@ -15,6 +15,7 @@ class Coupon extends Model
         'content',
         'code',
         'coupon_amount',
+        'user_use_limit',
         'expiration_time'
     ];
 
@@ -22,11 +23,13 @@ class Coupon extends Model
         return $this->hasManyThrough(User::class, CouponUser::class, 'coupon_id', 'id', 'id', 'user_id');
     }
 
-    public function used_users(){
-        return $this->hasManyThrough(User::class, CouponUser::class, 'coupon_id', 'id', 'id', 'user_id')->where('is_used', '=', 1);
-    }
-
-    public function not_used_users(){
-        return $this->hasManyThrough(User::class, CouponUser::class, 'coupon_id', 'id', 'id', 'user_id')->where('is_used', '=', 0);
+    public function definedUser($userid){
+        $couponuser = CouponUser::where('user_id', '=', $userid)->where('coupon_id', '=', $this->id)->first();
+        if($couponuser){
+            return $couponuser;
+        }
+        else{
+            return false;
+        }
     }
 }

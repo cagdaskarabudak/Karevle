@@ -72,3 +72,26 @@ if(addressDefaultButtons){
         });
     })
 }
+
+let addressInvoiceDefaultButtons = document.querySelectorAll('.address-invoice-default-btn');
+
+if(addressInvoiceDefaultButtons){
+    addressInvoiceDefaultButtons.forEach(addressInvoiceDefaultButton => {
+        addressInvoiceDefaultButton.addEventListener('click', async function(){
+            let addressid = addressInvoiceDefaultButton.getAttribute('data-id');
+            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
+                    try {
+                        const response = await axios.post('/defaultInvoiceAddress', {
+                            addressid: addressid
+                        });
+                        if(response.data == true){
+                            window.location.reload();
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        throw error;
+                    }
+        });
+    });
+}

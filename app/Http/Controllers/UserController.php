@@ -118,42 +118,176 @@ class UserController extends Controller
 
             DB::beginTransaction();
 
-            $request->validate([
-                'first_name' => 'string|required',
-                'last_name' => 'string|required',
-                'phone' => 'required|string|max:10|min:10',
-                'country' => 'required|string',
-                'city' => 'required|string',
-                'district' => 'required|string',
-                'address' => 'required|string',
-                'postal_code' => 'required|string|min:5|max:5'
-            ]);
             $user = Auth::user();
 
-            $address = new Address;
-            $address->title = $request->title;
-            $address->user_id = $user->id;
-            $address->first_name = $request->first_name;
-            $address->last_name = $request->last_name;
-            $address->phone = $request->phone;
-            $address->country = $request->country;
-            $address->city = $request->city;
-            $address->district = $request->district;
-            $address->address = $request->address;
-            $address->postal_code = $request->postal_code;
-            if($request->has('is_default')){
-                foreach($user->addresses as $useraddress){
-                    $useraddress->update([
-                        'is_default' => 0
+            if($request->address_type){
+                if($request->address_type == 'personal'){
+                    $request->validate([
+                        'first_name' => 'string|required',
+                        'last_name' => 'string|required',
+                        'email' => 'required|email',
+                        'phone' => 'required|string|max:10|min:10',
+                        'country' => 'required|string',
+                        'city' => 'required|string',
+                        'district' => 'required|string',
+                        'address' => 'required|string',
+                        'postal_code' => 'required|string|min:5|max:5'
                     ]);
-                }
-                $address->is_default = 1;
-            }
-            else{
-                $address->is_default = 0;
-            }
 
-            $address->save();
+                    $address = new Address;
+                    $address->title = $request->title;
+                    $address->type = $request->address_type;
+                    $address->user_id = $user->id;
+                    $address->first_name = $request->first_name;
+                    $address->last_name = $request->last_name;
+                    $address->email = $request->email;
+                    $address->phone = $request->phone;
+                    $address->country = $request->country;
+                    $address->city = $request->city;
+                    $address->district = $request->district;
+                    $address->address = $request->address;
+                    $address->postal_code = $request->postal_code;
+                    if($request->has('is_default')){
+                        foreach($user->addresses as $useraddress){
+                            $useraddress->update([
+                                'is_default' => 0
+                            ]);
+                        }
+                        $address->is_default = 1;
+                    }
+                    else{
+                        $address->is_default = 0;
+                    }
+
+                    if($request->has('is_invoice_default')){
+                        foreach($user->addresses as $useraddress){
+                            $useraddress->update([
+                                'is_invoice_default' => 0
+                            ]);
+                        }
+                        $address->is_invoice_default = 1;
+                    }
+                    else{
+                        $address->is_invoice_default = 0;
+                    }
+        
+                    $address->save();
+                }
+                else if($request->address_type == 'personal_company'){
+                    $request->validate([
+                        'first_name' => 'string|required',
+                        'last_name' => 'string|required',
+                        'ID_number' => 'string|required|max:11',
+                        'email' => 'required|email',
+                        'phone' => 'required|string|max:10|min:10',
+                        'country' => 'required|string',
+                        'city' => 'required|string',
+                        'district' => 'required|string',
+                        'address' => 'required|string',
+                        'postal_code' => 'required|string|min:5|max:5'
+                    ]);
+
+                    $address = new Address;
+                    $address->title = $request->title;
+                    $address->type = $request->address_type;
+                    $address->user_id = $user->id;
+                    $address->first_name = $request->first_name;
+                    $address->last_name = $request->last_name;
+                    $address->ID_number = $request->ID_number;
+                    $address->email = $request->email;
+                    $address->phone = $request->phone;
+                    $address->country = $request->country;
+                    $address->city = $request->city;
+                    $address->district = $request->district;
+                    $address->address = $request->address;
+                    $address->postal_code = $request->postal_code;
+                    if($request->has('is_default')){
+                        foreach($user->addresses as $useraddress){
+                            $useraddress->update([
+                                'is_default' => 0
+                            ]);
+                        }
+                        $address->is_default = 1;
+                    }
+                    else{
+                        $address->is_default = 0;
+                    }
+
+                    if($request->has('is_invoice_default')){
+                        foreach($user->addresses as $useraddress){
+                            $useraddress->update([
+                                'is_invoice_default' => 0
+                            ]);
+                        }
+                        $address->is_invoice_default = 1;
+                    }
+                    else{
+                        $address->is_invoice_default = 0;
+                    }
+        
+                    $address->save();
+                }
+                else if($request->address_type == 'company'){
+                    $request->validate([
+                        'first_name' => 'string|required',
+                        'last_name' => 'string|required',
+                        'company_name' => 'string|required',
+                        'tax_office' => 'string|required',
+                        'tax_number' => 'string|required',
+                        'mersis_number' => 'string|required',
+                        'email' => 'required|email',
+                        'phone' => 'required|string|max:10|min:10',
+                        'country' => 'required|string',
+                        'city' => 'required|string',
+                        'district' => 'required|string',
+                        'address' => 'required|string',
+                        'postal_code' => 'required|string|min:5|max:5'
+                    ]);
+
+                    $address = new Address;
+                    $address->title = $request->title;
+                    $address->type = $request->address_type;
+                    $address->user_id = $user->id;
+                    $address->first_name = $request->first_name;
+                    $address->last_name = $request->last_name;
+                    $address->company_name = $request->company_name;
+                    $address->tax_office = $request->tax_office;
+                    $address->tax_number = $request->tax_number;
+                    $address->mersis_number = $request->mersis_number;
+                    $address->email = $request->email;
+                    $address->phone = $request->phone;
+                    $address->country = $request->country;
+                    $address->city = $request->city;
+                    $address->district = $request->district;
+                    $address->address = $request->address;
+                    $address->postal_code = $request->postal_code;
+                    if($request->has('is_default')){
+                        foreach($user->addresses as $useraddress){
+                            $useraddress->update([
+                                'is_default' => 0
+                            ]);
+                        }
+                        $address->is_default = 1;
+                    }
+                    else{
+                        $address->is_default = 0;
+                    }
+
+                    if($request->has('is_invoice_default')){
+                        foreach($user->addresses as $useraddress){
+                            $useraddress->update([
+                                'is_invoice_default' => 0
+                            ]);
+                        }
+                        $address->is_invoice_default = 1;
+                    }
+                    else{
+                        $address->is_invoice_default = 0;
+                    }
+        
+                    $address->save();
+                }
+            }
 
             DB::commit();
 
@@ -195,42 +329,107 @@ class UserController extends Controller
 
             DB::beginTransaction();
 
-            $request->validate([
-                'first_name' => 'string|required',
-                'last_name' => 'string|required',
-                'phone' => 'required|string|max:10|min:10',
-                'country' => 'required|string',
-                'city' => 'required|string',
-                'district' => 'required|string',
-                'address' => 'required|string',
-                'postal_code' => 'required|string|min:5|max:5'
-            ]);
-
             $user = Auth::user();
 
-            $address = Address::where('id', '=', $request->id)->first();
-            $address->title = $request->title;
-            $address->first_name = $request->first_name;
-            $address->last_name = $request->last_name;
-            $address->phone = $request->phone;
-            $address->country = $request->country;
-            $address->city = $request->city;
-            $address->district = $request->district;
-            $address->address = $request->address;
-            $address->postal_code = $request->postal_code;
-            if($request->has('is_default')){
-                foreach($user->addresses as $useraddress){
-                    $useraddress->update([
-                        'is_default' => 0
+            if($request->address_type){
+                if($request->address_type == 'personal'){
+                    $request->validate([
+                        'first_name' => 'string|required',
+                        'last_name' => 'string|required',
+                        'email' => 'required|email',
+                        'phone' => 'required|string|max:10|min:10',
+                        'country' => 'required|string',
+                        'city' => 'required|string',
+                        'district' => 'required|string',
+                        'address' => 'required|string',
+                        'postal_code' => 'required|string|min:5|max:5'
                     ]);
-                }
-                $address->is_default = 1;
-            }
-            else{
-                $address->is_default = 0;
-            }
 
-            $address->save();
+                    $address = Address::where('id', '=', $request->id)->first();
+                    $address->title = $request->title;
+                    $address->type = $request->address_type;
+                    $address->user_id = $user->id;
+                    $address->first_name = $request->first_name;
+                    $address->last_name = $request->last_name;
+                    $address->email = $request->email;
+                    $address->phone = $request->phone;
+                    $address->country = $request->country;
+                    $address->city = $request->city;
+                    $address->district = $request->district;
+                    $address->address = $request->address;
+                    $address->postal_code = $request->postal_code;
+        
+                    $address->save();
+                }
+                else if($request->address_type == 'personal_company'){
+                    $request->validate([
+                        'first_name' => 'string|required',
+                        'last_name' => 'string|required',
+                        'ID_number' => 'string|required|max:11',
+                        'email' => 'required|email',
+                        'phone' => 'required|string|max:10|min:10',
+                        'country' => 'required|string',
+                        'city' => 'required|string',
+                        'district' => 'required|string',
+                        'address' => 'required|string',
+                        'postal_code' => 'required|string|min:5|max:5'
+                    ]);
+
+                    $address = Address::where('id', '=', $request->id)->first();
+                    $address->title = $request->title;
+                    $address->type = $request->address_type;
+                    $address->user_id = $user->id;
+                    $address->first_name = $request->first_name;
+                    $address->last_name = $request->last_name;
+                    $address->ID_number = $request->ID_number;
+                    $address->email = $request->email;
+                    $address->phone = $request->phone;
+                    $address->country = $request->country;
+                    $address->city = $request->city;
+                    $address->district = $request->district;
+                    $address->address = $request->address;
+                    $address->postal_code = $request->postal_code;
+        
+                    $address->save();
+                }
+                else if($request->address_type == 'company'){
+                    $request->validate([
+                        'first_name' => 'string|required',
+                        'last_name' => 'string|required',
+                        'company_name' => 'string|required',
+                        'tax_office' => 'string|required',
+                        'tax_number' => 'string|required',
+                        'mersis_number' => 'string|required',
+                        'email' => 'required|email',
+                        'phone' => 'required|string|max:10|min:10',
+                        'country' => 'required|string',
+                        'city' => 'required|string',
+                        'district' => 'required|string',
+                        'address' => 'required|string',
+                        'postal_code' => 'required|string|min:5|max:5'
+                    ]);
+
+                    $address = Address::where('id', '=', $request->id)->first();
+                    $address->title = $request->title;
+                    $address->type = $request->address_type;
+                    $address->user_id = $user->id;
+                    $address->first_name = $request->first_name;
+                    $address->last_name = $request->last_name;
+                    $address->company_name = $request->company_name;
+                    $address->tax_office = $request->tax_office;
+                    $address->tax_number = $request->tax_number;
+                    $address->mersis_number = $request->mersis_number;
+                    $address->email = $request->email;
+                    $address->phone = $request->phone;
+                    $address->country = $request->country;
+                    $address->city = $request->city;
+                    $address->district = $request->district;
+                    $address->address = $request->address;
+                    $address->postal_code = $request->postal_code;
+        
+                    $address->save();
+                }
+            }
 
             DB::commit();
 
@@ -253,6 +452,29 @@ class UserController extends Controller
             }
 
             $address->is_default = 1;
+            $address->save();
+
+            DB::commit();
+
+            return response()->json(true);
+        }catch(\Exception $e){
+            DB::rollback();
+            return redirect()->back()->withErrors($e->getMessage());
+        }
+    }
+
+    public function defaultInvoiceAddress(Request $request){
+        try{
+            DB::beginTransaction();
+            $user = Auth::user();
+            $address = Address::where('id', '=', $request->addressid)->first();
+
+            foreach($user->addresses as $userAddress){
+                $userAddress->is_invoice_default = 0;
+                $userAddress->save();
+            }
+
+            $address->is_invoice_default = 1;
             $address->save();
 
             DB::commit();
