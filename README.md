@@ -8,4 +8,4 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 To learn Karevle, you can go to the [documentation here](https://demo.karevle.com/docs).
 
-[Click here for The Demo Preview.] (https://demo.karevle.com)
+[Click here for The Demo Preview](https://demo.karevle.com). 
