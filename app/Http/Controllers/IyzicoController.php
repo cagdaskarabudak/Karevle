@@ -118,15 +118,12 @@ class IyzicoController extends Controller
         $payment = Payment::create($request, $options);
 
         if ($payment->getStatus() == 'success') {
-            $orderStatusUpdateTransaction = OrderController::status_update($order->id, 3);
             $payment_status = [
                 'status' => 'success',
-                'order_id' => $order->id,
             ];
 
             return response()->json($payment_status);
         } else {
-            $orderStatusUpdateTransaction = OrderController::status_update($order->id, 11);
             $payment_status = [
                 'status' => 'fail',
                 'error_code' => $payment->getErrorCode(),
@@ -138,7 +135,6 @@ class IyzicoController extends Controller
     }
 
     public static function paymentWith3DSecure($order, $card){
-        Cache::put('order_id', $order->id);
 
         $API_KEY = env('IYZICO_API_KEY');
         $API_SECRET = env('IYZICO_API_SECRET');
@@ -268,19 +264,12 @@ class IyzicoController extends Controller
         $payment = ThreedsPayment::create($request, $options);
     
         if ($payment->getStatus() == 'success') {
-            $orderid = Cache::get('order_id');
-            $orderStatusUpdateTransaction = OrderController::status_update($orderid, 3);
-            Cache::forget('order_id');
             $payment_status = [
                 'status' => 'success',
-                'order_id' => $orderid,
             ];
 
             return view('shopping-cart.shopping-cart-payment-status', compact('payment_status'));
         } else {
-            $orderid = Cache::get('order_id');
-            $orderStatusUpdateTransaction = OrderController::status_update($orderid, 11);
-            Cache::forget('order_id');
             $payment_status = [
                 'status' => 'fail',
                 'error_code' => $payment->getErrorCode(),

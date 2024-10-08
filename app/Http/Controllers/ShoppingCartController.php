@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cache;
 use App\Models\UserBasket;
 use App\Models\Shoppingcart;
 use App\Models\ShoppingcartProduct;
@@ -13,6 +14,7 @@ use App\Models\ShoppingcartCargo;
 use App\Models\ShoppingCartDeliveryAddress;
 use App\Models\ShoppingCartInvoiceAddress;
 use App\Models\Coupon;
+use App\Models\Order;
 use App\Models\CouponUser;
 use App\Models\Cargo;
 use App\Models\Address;
@@ -663,24 +665,12 @@ class ShoppingCartController extends Controller
             "user" => $request->cc_user
         ];
 
-        $order = OrderController::create();
-
-        if($order['status'] == true){
-            $orderStatusUpdateTransaction = OrderController::status_update($order['order']->id, 2);
-            if($orderStatusUpdateTransaction['status'] == true){
-                if($request->has('threeds')){
-                    return IyzicoController::paymentWith3DSecure($order['order'], $card);
-                }
-                else{
-                    return IyzicoController::payment($order['order'], $card);
-                }
-            }
-            else{
-                return response()->json(['Order not updated!', $orderStatusUpdateTransaction['message'], $orderStatusUpdateTransaction['line']]);
-            }
+        $order = Order::where('id', '=', $request->order_id)->first();
+        if($request->has('threeds')){
+            return IyzicoController::paymentWith3DSecure($order, $card);
         }
         else{
-            return response()->json(['Order not Created!', $order['message'], $order['line']]);
+            return IyzicoController::payment($order, $card);
         }
         
     }

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\ShoppingcartMiddleware;
+use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ListController;
 use App\Http\Controllers\CategoryController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\IyzicoController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', [MainController::class, 'home'])->name('home');
 
@@ -41,6 +43,8 @@ Route::middleware([ShoppingcartMiddleware::class])->group(function () {
     Route::post('/sepetim/odeme', [ShoppingCartController::class, 'paymentTransaction'])->name('shopping-cart.payment.transaction');
     Route::post('/sepetim/odeme/3Donay', [IyzicoController::class, 'complete3DSecurePayment']);
     Route::get('/shopping-cart/destroy', [ShoppingCartController::class, 'destroy'])->name('shopping-cart.destroy');
+    Route::get('/order/create', [OrderController::class, 'create'])->name('order.create');
+    Route::post('/order/status_update', [OrderController::class, 'status_update'])->name('order.status_update');
 });
 
 Route::post('/addShoppingCart', [ShoppingCartController::class, 'add'])->name('shopping-cart.add');
@@ -83,8 +87,10 @@ Route::middleware([AuthMiddleware::class])->group(function () {
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.home');
+});
 
+Route::middleware([RoleMiddleware::class])->group(function(){
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.home');
 });
 
 

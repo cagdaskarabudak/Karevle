@@ -1,3 +1,34 @@
+.top-navbar
+    width: 100%
+    height: 30px
+    background: $white
+    z-index: 4
+    display: flex
+    justify-content: end
+    @include responsive('xs')
+        display: none
+    @include responsive('sm')
+        display: none
+    @include responsive('md')
+        display: none
+    @include responsive('lg')
+        display: none
+    .link-group
+        height: 100%
+        display: flex
+        justify-content: center
+        align-items: center
+        padding-right: 5%
+        width: max-content
+        a
+            text-decoration: none
+            color: $secondary
+            margin-right: 25px
+            font-size: 10pt
+            transition: 0.3s
+            &:hover
+                color: $primary
+
 .mobile-navbar
     display: flex
     justify-content: center
@@ -346,7 +377,7 @@
     @include responsive('xl')
         position: absolute
         left: 0
-        top: 0
+        top: 30px
         height: 130px
         &.fixed-nav-div
             position: fixed
@@ -365,7 +396,7 @@
     @include responsive('xxl')
         position: absolute
         left: 0
-        top: 0
+        top: 30px
         height: 130px
         &.fixed-nav-div
             position: fixed

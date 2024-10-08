@@ -1,3 +1,13 @@
+<div class="top-navbar">
+  <div class="link-group">
+    <a href="#">Satış Yap</a>
+    <a href="#">Hakkımızda</a>
+    <a href="#">Destek</a>
+    <?php if(Auth::check() && Auth::user()->role->name == 'Administrator'): ?>
+    <a href="<?php echo e(route('dashboard.home')); ?>">Yönetim Paneli</a>
+    <?php endif; ?>
+  </div>
+</div>
 <div class="mobile-navbar">
   <a href="<?php echo e(route('home')); ?>" class="brand">
       <?php if (isset($component)) { $__componentOriginal40b9bc8bbe72b013cda6958fd160ce72 = $component; } ?>

@@ -1,2 +1,3 @@
-<x-d-page title='Ana Sayfa - Yönetim Paneli'>
-</x-d-page>
+<x-dashboard-page title='Ana Sayfa - Yönetim Paneli'>
+    
+</x-dashboard-page>

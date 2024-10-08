@@ -1,3 +1,13 @@
+<div class="top-navbar">
+  <div class="link-group">
+    <a href="#">Satış Yap</a>
+    <a href="#">Hakkımızda</a>
+    <a href="#">Destek</a>
+    @if(Auth::check() && Auth::user()->role->name == 'Administrator')
+    <a href="{{ route('dashboard.home') }}">Yönetim Paneli</a>
+    @endif
+  </div>
+</div>
 <div class="mobile-navbar">
   <a href="{{ route('home') }}" class="brand">
       <x-application-logo />

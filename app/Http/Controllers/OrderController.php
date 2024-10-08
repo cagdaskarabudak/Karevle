@@ -96,19 +96,19 @@ class OrderController extends Controller
             $order_cargo->save();
 
             DB::commit();
-            return ['status' => true, 'order' => $order];
+            return response()->json(['status' => true, 'order' => $order]);
         } catch(\Exception $e){
             DB::rollBack();
-            return ['status' => false, 'message' => $e->getMessage(), 'line' => $e->getLine()];
+            return response()->json(['status' => false, 'message' => $e->getMessage(), 'line' => $e->getLine()]);
         }
 
     }
 
-    public static function status_update($order_id, $status_id){
+    public function status_update(Request $request){
         try{
             DB::beginTransaction();
-            $order = Order::where('id', '=', $order_id)->first();
-            $order->status_id = $status_id;
+            $order = Order::where('id', '=', $request->order_id)->first();
+            $order->status_id = $request->status_id;
             $order->save();
 
             DB::commit();

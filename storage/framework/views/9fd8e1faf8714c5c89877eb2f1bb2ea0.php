@@ -65,120 +65,153 @@ formcc.addEventListener('submit', async function(e){
     axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
 
     try {
-        let formccdata = new FormData(formcc);
-        const response = await axios.post('/sepetim/odeme', formccdata, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            }
-        });
-        if(response.data.status == 'page'){
-            let threeds = document.querySelector('.threeds');
-            threeds.classList.add('show');
-            let iframe = document.createElement('iframe');
-            threeds.append(iframe);
-            iframe.srcdoc = response.data.html;
-
-            window.addEventListener('message', async function(e){
-                if(e.data.status == 'success'){
-                    threeds.classList.remove('show');
-                    iframe.remove();
-                    const shoppingcartdestroy = await axios.get('/shopping-cart/destroy');
-                    if(shoppingcartdestroy.data.status == true){
-                        Swal.fire({
-                                title: 'Ödeme Başarılı!',
-                                icon: 'success',
-                                confirmButtonText: 'Devam et'
-                            }).then(res => {
-                                if(res.isConfirmed){
-                                    <?php if(auth()->guard()->check()): ?>
-                                        window.location.href = "/profilim/siparislerim?order_id="+response.data.order_id;
-                                    <?php else: ?>
-                                        window.location.href = "/?order_id="+response.data.order_id;
-                                    <?php endif; ?>
-                                }
+        const orderTransaction = await axios.get('/order/create');
+        if(orderTransaction.data.status == true){
+            const orderPaymentPendingStatusTransaction = await axios.post('/order/status_update', {
+                                'status_id': 2,
+                                'order_id': orderTransaction.data.order.id
                             });
-                    }
-                    else{
-                        Swal.fire({
-                                title: 'Ödeme Başarılı!',
-                                icon: 'success',
-                                confirmButtonText: 'Devam et',
-                                text: 'Ödeme başarıyla alındı fakat sepet temizlenmedi! => '+shoppingcartdestroy.data.message
-                            }).then(res => {
-                                if(res.isConfirmed){
-                                    <?php if(auth()->guard()->check()): ?>
-                                        window.location.href = "/profilim/siparislerim?order_id="+response.data.order_id;
-                                    <?php else: ?>
-                                        window.location.href = "/?order_id="+response.data.order_id;
-                                    <?php endif; ?>
-                                }
-                            });
-                    }
-                }
-                else if(e.data.status == 'fail'){
-                    threeds.classList.remove('show');
-                    iframe.remove();
-                    Swal.fire({
-                        title: e.data.error_code,
-                        icon: 'error',
-                        text: e.data.error_message,
-                        confirmButtonText: 'Kapat'
-                    }).then(response => {
-                        if(response.isConfirmed){
-                            window.location.reload();
-                        }
-                    });
+            let formccdata = new FormData(formcc);
+            formccdata.append('order_id', orderTransaction.data.order.id);
+            const response = await axios.post('/sepetim/odeme', formccdata, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
                 }
             });
-            
-        }
-        else if(response.data.status == 'fail'){
-            Swal.fire({
-                        title: response.data.error_code,
-                        icon: 'error',
-                        text: response.data.error_message,
-                        confirmButtonText: 'Kapat'
-                    }).then(res => {
-                        if(res.isConfirmed){
-                            window.location.reload();
-                        }
-                    });
-        }
-        else if(response.data.status == 'success'){
-            const shoppingcartdestroy = await axios.get('/shopping-cart/destroy');
-            if(shoppingcartdestroy.data.status == true){
-                Swal.fire({
-                        title: 'Ödeme Başarılı!',
-                        icon: 'success',
-                        confirmButtonText: 'Devam et'
-                    }).then(res => {
-                        if(res.isConfirmed){
-                            <?php if(auth()->guard()->check()): ?>
-                                window.location.href = "/profilim/siparislerim?order_id="+response.data.order_id;
-                            <?php else: ?>
-                                window.location.href = "/?order_id="+response.data.order_id;
-                            <?php endif; ?>
-                        }
-                    });
-            }
-            else{
-                Swal.fire({
-                        title: 'Ödeme Başarılı!',
-                        icon: 'success',
-                        confirmButtonText: 'Devam et',
-                        text: 'Ödeme başarıyla alındı fakat sepet temizlenmedi! => '+shoppingcartdestroy.data.message
-                    }).then(res => {
-                        if(res.isConfirmed){
-                            <?php if(auth()->guard()->check()): ?>
-                                window.location.href = "/profilim/siparislerim?order_id="+response.data.order_id;
-                            <?php else: ?>
-                                window.location.href = "/?order_id="+response.data.order_id;
-                            <?php endif; ?>
-                        }
-                    });
-            }
+            if(response.data.status == 'page'){
+                let threeds = document.querySelector('.threeds');
+                threeds.classList.add('show');
+                let iframe = document.createElement('iframe');
+                threeds.append(iframe);
+                iframe.srcdoc = response.data.html;
 
+                window.addEventListener('message', async function(e){
+                    if(e.data.status == 'success'){
+                        threeds.classList.remove('show');
+                        iframe.remove();
+                        const orderStatusTransaction = await axios.post('/order/status_update', {
+                                'status_id': 3,
+                                'order_id': orderTransaction.data.order.id
+                            });
+                        const shoppingcartdestroy = await axios.get('/shopping-cart/destroy');
+                        if(shoppingcartdestroy.data.status == true){
+                            Swal.fire({
+                                    title: 'Ödeme Başarılı!',
+                                    icon: 'success',
+                                    confirmButtonText: 'Devam et'
+                                }).then(res => {
+                                    if(res.isConfirmed){
+                                        <?php if(auth()->guard()->check()): ?>
+                                            window.location.href = "/profilim/siparislerim?order_id="+orderTransaction.data.order.id;
+                                        <?php else: ?>
+                                            window.location.href = "/?order_id="+orderTransaction.data.order.id;
+                                        <?php endif; ?>
+                                    }
+                                });
+                        }
+                        else{
+                            Swal.fire({
+                                    title: 'Ödeme Başarılı!',
+                                    icon: 'success',
+                                    confirmButtonText: 'Devam et',
+                                    text: 'Ödeme başarıyla alındı fakat sepet temizlenmedi! => '+shoppingcartdestroy.data.message
+                                }).then(res => {
+                                    if(res.isConfirmed){
+                                        <?php if(auth()->guard()->check()): ?>
+                                            window.location.href = "/profilim/siparislerim?order_id="+orderTransaction.data.order.id;
+                                        <?php else: ?>
+                                            window.location.href = "/?order_id="+orderTransaction.data.order.id;
+                                        <?php endif; ?>
+                                    }
+                                });
+                        }
+                    }
+                    else if(e.data.status == 'fail'){
+                        const orderStatusTransaction = await axios.post('/order/status_update', {
+                                'status_id': 11,
+                                'order_id': orderTransaction.data.order.id
+                            });
+                        threeds.classList.remove('show');
+                        iframe.remove();
+                        Swal.fire({
+                            title: e.data.error_code,
+                            icon: 'error',
+                            text: e.data.error_message,
+                            confirmButtonText: 'Kapat'
+                        }).then(response => {
+                            if(response.isConfirmed){
+                                window.location.reload();
+                            }
+                        });
+                    }
+                });
+                
+            }
+            else if(response.data.status == 'fail'){
+                const orderStatusTransaction = await axios.post('/order/status_update', {
+                                'status_id': 11,
+                                'order_id': orderTransaction.data.order.id
+                            });
+                Swal.fire({
+                            title: response.data.error_code,
+                            icon: 'error',
+                            text: response.data.error_message,
+                            confirmButtonText: 'Kapat'
+                        }).then(res => {
+                            if(res.isConfirmed){
+                                window.location.reload();
+                            }
+                        });
+            }
+            else if(response.data.status == 'success'){
+                const orderStatusTransaction = await axios.post('/order/status_update', {
+                                'status_id': 3,
+                                'order_id': orderTransaction.data.order.id
+                            });
+                const shoppingcartdestroy = await axios.get('/shopping-cart/destroy');
+                if(shoppingcartdestroy.data.status == true){
+                    Swal.fire({
+                            title: 'Ödeme Başarılı!',
+                            icon: 'success',
+                            confirmButtonText: 'Devam et'
+                        }).then(res => {
+                            if(res.isConfirmed){
+                                <?php if(auth()->guard()->check()): ?>
+                                    window.location.href = "/profilim/siparislerim?order_id="+orderTransaction.data.order.id;
+                                <?php else: ?>
+                                    window.location.href = "/?order_id="+orderTransaction.data.order.id;
+                                <?php endif; ?>
+                            }
+                        });
+                }
+                else{
+                    Swal.fire({
+                            title: 'Ödeme Başarılı!',
+                            icon: 'success',
+                            confirmButtonText: 'Devam et',
+                            text: 'Ödeme başarıyla alındı fakat sepet temizlenmedi! => '+shoppingcartdestroy.data.message
+                        }).then(res => {
+                            if(res.isConfirmed){
+                                <?php if(auth()->guard()->check()): ?>
+                                    window.location.href = "/profilim/siparislerim?order_id="+orderTransaction.data.order.id;
+                                <?php else: ?>
+                                    window.location.href = "/?order_id="+orderTransaction.data.order.id;
+                                <?php endif; ?>
+                            }
+                        });
+                }
+
+            }
         }
+        else{
+            Swal.fire({
+                title: 'Hata!',
+                text: 'Sipariş oluşturulamadı! '+orderTransaction.data.message + '('+orderTransaction.data.line+')',
+                icon: 'error',
+                confirmButtonText: 'Kapat'
+            });
+        }
+
     } catch (error) {
         throw error;
     }
